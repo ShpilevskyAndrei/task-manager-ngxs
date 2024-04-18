@@ -1,4 +1,4 @@
-export const API = 'assets/mock';
+export const API = 'assets/mock/data';
 
 export enum GatewaysEnum {
   Users = 'users',

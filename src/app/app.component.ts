@@ -1,20 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { Observable } from 'rxjs';
-import { ProgressBarStateService } from './core/services/progress-bar-state.service';
+
+import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatProgressBar, AsyncPipe, NgIf],
+  imports: [RouterOutlet, ProgressBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  private readonly _progressBarStateService = inject(ProgressBarStateService);
-
-  public loaderState$: Observable<boolean> =
-    this._progressBarStateService.getSpinnerState();
-}
+export class AppComponent {}
