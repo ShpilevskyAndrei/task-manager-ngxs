@@ -14,6 +14,7 @@ export class TasksControllerService {
 
   public createTaskControl(task: ITask): IResponse<ITask> {
     task.id = Math.floor(Math.random() * 1000000).toString();
+    task.date = new Date();
 
     return {
       status: ResponseStatusesEnum.Success,

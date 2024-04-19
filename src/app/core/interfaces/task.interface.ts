@@ -2,7 +2,7 @@ import { TaskPrioritiesEnum } from '../enums/task-priorities.enum';
 
 export interface ITask {
   id?: string;
-  date: Date;
+  date?: Date;
   title: string;
   description?: string;
   priority: TaskPrioritiesEnum;
