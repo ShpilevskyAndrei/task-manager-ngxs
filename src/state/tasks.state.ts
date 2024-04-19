@@ -12,6 +12,16 @@ export class GetTasks {
   public static readonly type = '[TASKS] Get';
 }
 
+export class CreateTask {
+  public static readonly type = '[TASKS] Create';
+  public constructor(public task: ITask) {}
+}
+
+export class DeleteTask {
+  public static readonly type = '[TASKS] Delete';
+  public constructor(public taskId: string) {}
+}
+
 export interface ITasksState {
   tasks: ITask[];
 }
@@ -31,6 +41,41 @@ export class TasksState {
     return this._tasksService.getTasks().pipe(
       tap((res: IResponse<ITask[]>): void => {
         ctx.setState({ tasks: res.data! });
+      }),
+    );
+  }
+
+  @Action(CreateTask)
+  public createTask(
+    ctx: StateContext<ITasksState>,
+    action: CreateTask,
+  ): Observable<GetTasks> {
+    const state: ITasksState = ctx.getState();
+
+    return this._tasksService.createTask(action.task).pipe(
+      tap((res: IResponse<ITask>): void => {
+        ctx.setState({ ...state, tasks: [...state.tasks, res.data!] });
+      }),
+    );
+  }
+
+  @Action(DeleteTask)
+  public deleteTask(
+    ctx: StateContext<ITasksState>,
+    action: DeleteTask,
+  ): Observable<GetTasks> {
+    const state: ITasksState = ctx.getState();
+
+    return this._tasksService.deleteTaskById(action.taskId).pipe(
+      tap((): void => {
+        ctx.setState({
+          ...state,
+          tasks: [
+            ...state.tasks.filter(
+              (task: ITask): boolean => task.id !== action.taskId,
+            ),
+          ],
+        });
       }),
     );
   }
