@@ -9,7 +9,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { TasksState } from '../state/tasks.state';
+import { TasksState } from './store/tasks/tasks.state';
+import { UsersState } from './store/users/users.state';
 
 import { routes } from './app.routes';
 import { progressBarInterceptor } from './core/interceptors/progress-bar.interceptor';
@@ -20,7 +21,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([progressBarInterceptor])),
     importProvidersFrom(
-      NgxsModule.forRoot([TasksState], { developmentMode: isDevMode() }),
+      NgxsModule.forRoot([UsersState, TasksState], {
+        developmentMode: isDevMode(),
+      }),
     ),
     importProvidersFrom(NgxsReduxDevtoolsPluginModule.forRoot()),
   ],
