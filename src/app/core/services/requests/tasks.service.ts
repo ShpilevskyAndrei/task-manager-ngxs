@@ -40,7 +40,7 @@ export class TasksService {
       .delete<ITask[]>(API, ENDPOINTS.tasks['deleteTask'])
       .pipe(
         map((): IResponse<boolean> => {
-          return this._tasksController.deleteTaskByIdControl();
+          return this._tasksController.deleteTaskByIdControl(taskId);
         }),
       );
   }

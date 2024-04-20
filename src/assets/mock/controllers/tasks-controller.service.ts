@@ -22,7 +22,7 @@ export class TasksControllerService {
     } as IResponse<ITask>;
   }
 
-  public deleteTaskByIdControl(): IResponse<boolean> {
+  public deleteTaskByIdControl(taskId: string): IResponse<boolean> {
     return {
       status: ResponseStatusesEnum.Success,
       data: true,
