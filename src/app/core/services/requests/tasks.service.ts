@@ -35,6 +35,16 @@ export class TasksService {
       );
   }
 
+  public editTask(task: ITask): Observable<IResponse<ITask>> {
+    return this._httpService
+      .post<ITask[]>(API, ENDPOINTS.tasks['editTask'], [task])
+      .pipe(
+        map((): IResponse<ITask> => {
+          return this._tasksController.editTaskControl(task);
+        }),
+      );
+  }
+
   public deleteTaskById(taskId: string): Observable<IResponse<boolean>> {
     return this._httpService
       .delete<ITask[]>(API, ENDPOINTS.tasks['deleteTask'])

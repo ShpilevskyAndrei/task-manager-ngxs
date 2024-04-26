@@ -22,6 +22,13 @@ export class TasksControllerService {
     } as IResponse<ITask>;
   }
 
+  public editTaskControl(task: ITask): IResponse<ITask> {
+    return {
+      status: ResponseStatusesEnum.Success,
+      data: task,
+    } as IResponse<ITask>;
+  }
+
   public deleteTaskByIdControl(taskId: string): IResponse<boolean> {
     return {
       status: ResponseStatusesEnum.Success,

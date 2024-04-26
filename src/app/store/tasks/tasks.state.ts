@@ -2,12 +2,12 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable, tap } from 'rxjs';
 
-import { Action, State, StateContext } from '@ngxs/store';
+import { Action, Select, State, StateContext } from '@ngxs/store';
 
 import { TasksService } from '../../core/services/requests/tasks.service';
 import { ITask } from '../../core/interfaces/task.interface';
 import { IResponse } from '../../core/interfaces/@response.interface';
-import { CreateTask, DeleteTask, GetTasks } from './tasks.actions';
+import { CreateTask, DeleteTask, EditTask, GetTasks } from './tasks.actions';
 
 @State<ITask[]>({
   name: 'tasks',
@@ -15,6 +15,8 @@ import { CreateTask, DeleteTask, GetTasks } from './tasks.actions';
 })
 @Injectable()
 export class TasksState {
+  @Select(GetTasks) public tasks$?: Observable<ITask[]>;
+
   private readonly _tasksService = inject(TasksService);
 
   @Action(GetTasks)
@@ -35,7 +37,25 @@ export class TasksState {
 
     return this._tasksService.createTask(action.task).pipe(
       tap((res: IResponse<ITask>): void => {
-        ctx.patchState([...state, res.data!]);
+        ctx.setState([res.data!, ...state]);
+      }),
+    );
+  }
+
+  @Action(EditTask)
+  public editTask(
+    ctx: StateContext<ITask[]>,
+    action: CreateTask,
+  ): Observable<GetTasks> {
+    const state: ITask[] = ctx.getState();
+
+    return this._tasksService.editTask(action.task).pipe(
+      tap((res: IResponse<ITask>): void => {
+        ctx.setState([
+          ...state.map((task: ITask) =>
+            task.id === action.task.id ? { ...task, ...res.data } : task,
+          ),
+        ]);
       }),
     );
   }
@@ -49,7 +69,7 @@ export class TasksState {
 
     return this._tasksService.deleteTaskById(action.taskId).pipe(
       tap((): void => {
-        ctx.patchState([
+        ctx.setState([
           ...state.filter((task: ITask): boolean => task.id !== action.taskId),
         ]);
       }),

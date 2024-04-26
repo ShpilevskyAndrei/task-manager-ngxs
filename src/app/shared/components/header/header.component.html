@@ -1,0 +1,36 @@
+<header class="header">
+  <mat-toolbar class="header__toolbar">
+    <span class="header__toolbar_lesson-info">{{
+      courseConfig | lessonInfo
+    }}</span>
+    <span class="header__toolbar_env">
+      {{ courseConfig.environment }}
+    </span>
+    <span class="header__toolbar_spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>link</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <p class="subtitle">Lesson links:</p>
+      <a
+        [href]="courseConfig.lesson.workspaceCode"
+        target="_blank"
+        mat-menu-item
+        >Workspace code</a
+      >
+      <a
+        [href]="courseConfig.lesson.solutionCommit"
+        target="_blank"
+        mat-menu-item
+        >Solution commit</a
+      >
+      <p class="subtitle" style="margin-top: 8px">NGXS links:</p>
+      <ng-container *ngFor="let techLink of courseConfig.techLinks">
+        <a [href]="techLink.url" target="_blank" mat-menu-item>{{
+          techLink.name
+        }}</a>
+      </ng-container>
+    </mat-menu>
+  </mat-toolbar>
+</header>

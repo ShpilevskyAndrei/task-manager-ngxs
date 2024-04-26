@@ -3,7 +3,7 @@ import {
   importProvidersFrom,
   isDevMode,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
@@ -14,10 +14,12 @@ import { UsersState } from './store/users/users.state';
 
 import { routes } from './app.routes';
 import { progressBarInterceptor } from './core/interceptors/progress-bar.interceptor';
+import { provideCourseConfig } from './core/configs/course.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideCourseConfig(),
+    provideRouter(routes, withViewTransitions()),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([progressBarInterceptor])),
     importProvidersFrom(

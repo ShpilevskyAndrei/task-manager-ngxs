@@ -24,6 +24,7 @@ export const progressBarInterceptor: HttpInterceptorFn = (
     delay(generateRandomDelay()), // response delay imitation
     catchError((error) => {
       progressBarService.hideSpinner();
+
       return throwError(() => error);
     }),
     finalize((): void => {

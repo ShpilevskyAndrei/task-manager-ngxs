@@ -1,0 +1,14 @@
+@import "../../../../../../../visual/styles";
+
+:host {
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    padding-top: $offset-12px;
+  }
+
+  mat-dialog-actions {
+    padding: $offset-24px;
+  }
+}

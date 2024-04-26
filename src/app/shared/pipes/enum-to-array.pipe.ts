@@ -4,10 +4,15 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'enumToArray',
   standalone: true,
 })
-export class EnumToArrayPipe implements PipeTransform {
-  public transform(data: unknown, excludeValue?: unknown): any[] {
-    if (data instanceof Object) {
-      return Object.values(data).filter((val): boolean => {
+export class EnumToArrayPipe<T> implements PipeTransform {
+  public transform<E extends T>(
+    data: E | { [key: string]: E },
+    excludeValue?: E | E[],
+  ): E[] {
+    if (data instanceof Object && !(data instanceof Array)) {
+      const values: E[] = Object.values(data);
+
+      return values.filter((val: E): boolean => {
         if (Array.isArray(excludeValue)) {
           return !excludeValue.includes(val);
         }
@@ -15,7 +20,7 @@ export class EnumToArrayPipe implements PipeTransform {
         return val !== excludeValue;
       });
     } else {
-      return [data];
+      return [data as E];
     }
   }
 }

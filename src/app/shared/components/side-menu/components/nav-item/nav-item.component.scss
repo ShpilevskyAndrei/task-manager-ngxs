@@ -1,0 +1,39 @@
+@import "../../../../../../visual/styles";
+
+:host {
+  .nav {
+    width: 100%;
+    &__link {
+      @include flex(row, center, flex-start);
+      padding: $offset-20px $offset-32px $offset-20px calc($offset-32px - 4px);
+      width: 100%;
+      border-left: 4px solid transparent;
+      box-sizing: border-box;
+      transition: border-left 0.15s ease-in-out;
+      &-active {
+        border-color: $color-deep-purple !important;
+        background: $color-gradient-deep-purple-medium !important;
+        color: $color-deep-purple !important;
+        img {
+          filter: $color-filter-deep-purple !important;
+        }
+      }
+      &:hover {
+        border-color: $color-deep-purple-easy;
+        background: $color-gradient-deep-purple-easy;
+        color: $color-deep-purple;
+        img {
+          filter: $color-filter-deep-purple;
+        }
+      }
+      &_icon {
+        margin-right: $offset-16px;
+      }
+      &_title {
+        font-size: $offset-16px;
+        font-weight: 400;
+        line-height: 22px;
+      }
+    }
+  }
+}

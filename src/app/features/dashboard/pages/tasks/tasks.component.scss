@@ -1,0 +1,63 @@
+@import "../../../../../visual/styles";
+
+:host {
+  .tasks-page {
+    &__subheader {
+      &_btn {
+        justify-self: flex-end;
+      }
+    }
+
+    &__table {
+      &__user_row {
+        @include flex(row, center, flex-start);
+        img {
+          height: 32px;
+          margin-right: $offset-8px;
+        }
+      }
+
+      &__priority {
+        border-radius: 24px;
+        min-width: 110px !important;
+        display: inline-block;
+        padding: $offset-4px $offset-20px;
+        box-sizing: border-box;
+        text-align: center;
+        &-low {
+          background-color: $color-blue-light;
+          color: $color-blue-extra-light;
+        }
+        &-medium {
+          background-color: $color-orange-extra-light;
+          color: $color-orange-light;
+        }
+        &-high {
+          background-color: $color-pink-extra-light;
+          color: $color-pink-light;
+        }
+      }
+    }
+
+    &_no-tasks {
+      font-size: $font-size-24px;
+      margin-left: $offset-16px;
+    }
+  }
+
+  table {
+    ::ng-deep thead {
+      tr {
+        color: $color-deep-purple;
+      }
+    }
+    ::ng-deep tbody {
+      tr {
+        cursor: pointer;
+        &:hover {
+          background-color: $color-deep-purple-light;
+        }
+      }
+    }
+  }
+}

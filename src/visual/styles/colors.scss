@@ -1,0 +1,33 @@
+//black
+$color-black-90: rgba(18, 18, 18, 0.9);
+$color-grey-default: grey;
+$color-grey: rgb(224, 224, 224);
+//white
+$color-whitesmoke: whitesmoke;
+$color-white-default: #ffffff;
+$color-white-10: rgba(255, 255, 255, 0.1);
+//primary
+$color-deep-purple: #5b33ae;
+$color-deep-purple-easy: rgba(91, 51, 174, 0.05);
+$color-deep-purple-light: rgba(91, 51, 174, 0.01);
+//other
+$color-blue-light: #f0f1ff;
+$color-blue-extra-light: #4971ff;
+$color-orange-light: #eaa238;
+$color-orange-extra-light: #faf7e3;
+$color-pink-light: #f2565c;
+$color-pink-extra-light: #ffeeeb;
+//gradients
+$color-gradient-deep-purple-easy: linear-gradient(
+  90deg,
+  rgba(91, 51, 174, 0.05) 0%,
+  rgba(255, 255, 255, 1) 100%
+);
+$color-gradient-deep-purple-medium: linear-gradient(
+  90deg,
+  rgba(91, 51, 174, 0.2) 0%,
+  rgba(255, 255, 255, 1) 100%
+);
+//filters
+$color-filter-deep-purple: invert(11%) sepia(88%) saturate(7253%)
+  hue-rotate(252deg) brightness(83%) contrast(135%);

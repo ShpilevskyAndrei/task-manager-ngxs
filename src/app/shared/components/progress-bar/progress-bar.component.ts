@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { NgIf } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ProgressBarStateService } from '../../../core/services/progress-bar-state.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-progress-bar',
@@ -21,11 +21,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent implements AfterViewInit {
+  public loaderState?: boolean;
+
   private readonly _progressBarStateService = inject(ProgressBarStateService);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _destroyRef = inject(DestroyRef);
-
-  public loaderState = false;
 
   public ngAfterViewInit(): void {
     this.trackLoaderState();
@@ -37,6 +37,7 @@ export class ProgressBarComponent implements AfterViewInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((state: boolean): void => {
         this.loaderState = state;
+
         this._cdr.detectChanges();
       });
   }

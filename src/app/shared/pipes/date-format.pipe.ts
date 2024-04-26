@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(dateString: string): string {
+  public transform(dateString: string): string {
     const date: Date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
       day: '2-digit',

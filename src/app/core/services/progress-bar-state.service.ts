@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, map } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class ProgressBarStateService {
   );
 
   public getSpinnerState(): Observable<boolean> {
-    return this._spinnerState$.asObservable().pipe(map((e: number) => !!e));
+    return this._spinnerState$.asObservable().pipe(map((v) => !!v));
   }
 
   public setSpinnerState(value: number): void {
@@ -24,7 +23,7 @@ export class ProgressBarStateService {
   }
 
   public hideSpinner(): void {
-    this.setSpinnerState(this._spinnerState$.value - 1);
+    this.setSpinnerState(Math.max(0, this._spinnerState$.value - 1));
   }
 
   public destroySpinner(): void {

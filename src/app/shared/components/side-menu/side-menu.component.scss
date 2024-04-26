@@ -1,0 +1,42 @@
+@import "../../../../visual/styles";
+
+:host {
+  .side-menu {
+    @include flex(column, flex-start, flex-start);
+    min-height: 100vh;
+    padding-top: $offset-20px;
+    box-sizing: border-box;
+    &__navs {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: calc(100vh - 20px);
+      &__logo {
+        @include flex(row, center, flex-start);
+        margin-left: $offset-24px;
+        height: 24px;
+        &__link {
+          @include flex(row, center, flex-start);
+          &_image {
+            height: 40px;
+            cursor: pointer;
+          }
+        }
+        &_text {
+          margin-left: $offset-8px;
+          font-size: $font-size-18px;
+          font-weight: normal;
+        }
+      }
+      &_divider {
+        width: 100%;
+        max-height: 1px;
+        border-top: 1px solid $color-grey;
+        margin: calc($offset-20px - 1px) 0 0;
+      }
+      &_spacer {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}

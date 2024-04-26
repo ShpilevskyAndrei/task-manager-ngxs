@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{ data.type | taskDialogTitle }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="form" [formGroup]="taskForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        @for (option of TaskPrioritiesEnum | enumToArray; track option) {
+          <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Assignee</mat-label>
+      <mat-select formControlName="userId">
+        @for (user of users(); track user.id) {
+          <mat-option [value]="user.id">{{ user.displayName }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" style="">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    *ngIf="data.type !== TaskDialogType.Read"
+    mat-button
+    cdkFocusInitial
+    color="primary"
+    (click)="data.type === TaskDialogType.Edit ? editTask() : createTask()"
+  >
+    {{ data.type | firstLetterUppercase }}
+  </button>
+</mat-dialog-actions>

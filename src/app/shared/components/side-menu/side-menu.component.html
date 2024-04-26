@@ -1,0 +1,30 @@
+<section class="side-menu">
+  <nav class="side-menu__navs">
+    <div class="side-menu__navs__logo">
+      <a class="side-menu__navs__logo__link" routerLink="../dashboard">
+        <img
+          class="side-menu__navs__logo__link_image"
+          src="assets/images/ngxs.png"
+          alt="NGXS"
+        />
+      </a>
+      <span class="side-menu__navs__logo_text">NGXS course</span>
+    </div>
+    <div class="side-menu__navs_divider"></div>
+    <ng-container *ngFor="let mainNav of sideMenuNavs">
+      <app-nav-item
+        *ngIf="mainNav.type === 'main'"
+        [nav]="mainNav"
+        [isNavItemActive]="mainNav.path === activePath()"
+      ></app-nav-item>
+    </ng-container>
+    <span class="side-menu__navs_spacer"></span>
+    <ng-container *ngFor="let mainNav of sideMenuNavs">
+      <app-nav-item
+        *ngIf="mainNav.type === 'additional'"
+        [nav]="mainNav"
+        (onClickEmitter)="logout()"
+      ></app-nav-item>
+    </ng-container>
+  </nav>
+</section>

@@ -1,0 +1,106 @@
+<main class="tasks-page">
+  <app-subheader class="tasks-page__subheader">
+    <button
+      class="tasks-page__subheader_btn"
+      mat-raised-button
+      color="primary"
+      (click)="openCreateTaskDialog()"
+    >
+      Create task
+    </button>
+  </app-subheader>
+
+  @if (tasks$ | async; as tasks) {
+    @if (tasks.length) {
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8 tasks-page__table"
+      >
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Task title</th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef>Priority</th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              class="tasks-page__table__priority"
+              [class]="element.priority | priorityClass"
+              >{{ element.priority }}</span
+            >
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef>User</th>
+          <td mat-cell *matCellDef="let element">
+            @if (users() && users().length) {
+              <span class="tasks-page__table__user_row">
+                <img
+                  src="{{ (element.userId | userInfo: users())?.avatar }}"
+                  alt="avatar"
+                />
+                <span>
+                  {{
+                    (element.userId | userInfo: users())?.displayName ||
+                      element.userId
+                  }}
+                </span>
+              </span>
+            } @else {
+              {{ element.userId }}
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.date | date }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <div style="display: flex">
+              <button
+                mat-icon-button
+                (click)="openEditTaskDialog($event, element)"
+              >
+                <mat-icon color="primary">edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteTask($event, element.id)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="openTaskInfo(row)"
+        ></tr>
+      </table>
+    } @else {
+      <p class="tasks-page_no-tasks">There are no tasks</p>
+    }
+  }
+
+  <mat-paginator
+    [ngStyle]="{ display: (tasks$ | async)?.length ? 'block' : 'none' }"
+    [pageSize]="pageSize"
+    aria-label="Select page of users"
+  ></mat-paginator>
+</main>

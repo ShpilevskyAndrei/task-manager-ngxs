@@ -1,0 +1,45 @@
+<main class="welcome">
+  <div class="welcome__content">
+    <h1 class="welcome__content_title">
+      <span>Deep Dive into</span>
+      <span style="">NGXS</span>
+      <span style="">with Angular 17</span>
+    </h1>
+    <img src="assets/images/ngxs.png" alt="NGXS" class="welcome__content_img" />
+    <div class="welcome__content__lesson">
+      <p class="welcome__content__lesson_topic">
+        {{ courseConfig | lessonInfo }}
+      </p>
+      <p class="welcome__content__lesson_type">
+        <span
+          class="welcome__content__lesson_type-{{ courseConfig.environment }}"
+        >
+          {{ courseConfig.environment }}
+        </span>
+      </p>
+      <div class="welcome__content__lesson_links">
+        <a
+          [href]="courseConfig.lesson.workspaceCode"
+          target="_blank"
+          mat-flat-button
+        >
+          Workspace code
+        </a>
+        <a
+          [href]="courseConfig.lesson.solutionCommit"
+          target="_blank"
+          mat-flat-button
+        >
+          Solution commit
+        </a>
+      </div>
+      <a
+        class="welcome__content__lesson_go-to"
+        [routerLink]="(isAuth$ | async) ? '../dashboard' : '../login'"
+        mat-flat-button
+      >
+        {{ (isAuth$ | async) ? "Go to dashboard" : "Login" }}
+      </a>
+    </div>
+  </div>
+</main>

@@ -1,7 +1,7 @@
 :host {
   .progress-bar {
-    position: absolute;
-    min-width: 100vw;
+    position: fixed;
+    min-width: 100%;
     top: 0;
     z-index: 666;
   }

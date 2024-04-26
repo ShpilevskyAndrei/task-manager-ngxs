@@ -1,37 +1,103 @@
-import { Component, inject, OnInit } from '@angular/core';
-
-import { Store } from '@ngxs/store';
-import { GetUsers } from '../../store/users/users.actions';
 import {
-  CreateTask,
-  DeleteTask,
-  GetTasks,
-} from '../../store/tasks/tasks.actions';
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  Signal,
+} from '@angular/core';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
+import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { MatList, MatListItem } from '@angular/material/list';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AsyncPipe } from '@angular/common';
 
-import { ITask } from '../../core/interfaces/task.interface';
+import { filter } from 'rxjs';
+
+import {
+  INav,
+  sideMenuNavs,
+} from '../../shared/components/side-menu/side-menu.navs';
+import { SideMenuComponent } from '../../shared/components/side-menu/side-menu.component';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { SideMenuService } from '../../shared/components/side-menu/side-menu.service';
+import { GetUsers } from '../../store/users/users.actions';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  imports: [
+    RouterOutlet,
+    MatDrawer,
+    MatDrawerContainer,
+    MatIcon,
+    MatIconButton,
+    RouterLink,
+    MatList,
+    MatListItem,
+    SideMenuComponent,
+    HeaderComponent,
+    AsyncPipe,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
+  public activeNav?: INav;
+
+  public isSideMenuOpened: Signal<boolean>;
+
+  private readonly _router = inject(Router);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _sideMenuService = inject(SideMenuService);
   private readonly _store = inject(Store);
 
+  public constructor() {
+    this.isSideMenuOpened = this._sideMenuService.getIsOpen();
+  }
+
   public ngOnInit(): void {
-    this._store.dispatch(new GetTasks());
+    this.trackPaths();
+    this.dispatchGetUsers();
+  }
+
+  private dispatchGetUsers(): void {
     this._store.dispatch(new GetUsers());
-
-    // this._store.dispatch([new GetTasks(), new GetUsers()]);
   }
 
-  private createTask(newTask: ITask): void {
-    this._store.dispatch(new CreateTask(newTask));
+  private trackPaths(): void {
+    this.activeNav = sideMenuNavs.find(
+      (nav: INav): boolean =>
+        nav.path === this.extractPageFromUrl(this._router.url),
+    );
+
+    this._router.events
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        filter((event): boolean => event instanceof NavigationEnd),
+      )
+      .subscribe((event): void => {
+        if (event instanceof NavigationEnd) {
+          this.activeNav = sideMenuNavs.find(
+            (nav: INav): boolean =>
+              nav.path === this.extractPageFromUrl(this._router.url),
+          );
+        }
+      });
   }
 
-  private deleteTask(taskId: string): void {
-    this._store.dispatch(new DeleteTask(taskId));
+  private extractPageFromUrl(url: string): string {
+    const parts: string[] = url.split('/');
+
+    return parts[parts.length - 1];
   }
 }
