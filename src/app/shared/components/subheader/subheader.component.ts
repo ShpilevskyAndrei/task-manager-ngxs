@@ -9,11 +9,12 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 import { SideMenuService } from '../side-menu/side-menu.service';
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-subheader',
   standalone: true,
-  imports: [NgClass, MatIcon, MatIconButton],
+  imports: [NgClass, MatIcon, MatIconButton, MatTooltip],
   templateUrl: './subheader.component.html',
   styleUrl: './subheader.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -43,6 +43,7 @@ import { SubheaderComponent } from '../../../../shared/components/subheader/subh
 import { TaskDialogType } from './components/task-dialog/enums/task-dialog-type.enum';
 import { tasksTableColumns } from './tasks-columns';
 import { PriorityClassPipe } from './pipes/priority-class.pipe';
+import {MatSort, MatSortHeader} from "@angular/material/sort";
 
 @Component({
   selector: 'app-tasks',
@@ -71,6 +72,8 @@ import { PriorityClassPipe } from './pipes/priority-class.pipe';
     NgClass,
     SubheaderComponent,
     PriorityClassPipe,
+    MatSort,
+    MatSortHeader,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',

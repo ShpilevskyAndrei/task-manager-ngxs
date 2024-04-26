@@ -11,6 +11,7 @@ import {
   ICourseConfig,
 } from '../../../core/configs/course.config';
 import { LessonInfoPipe } from '../../pipes/lesson-info.pipe';
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ import { LessonInfoPipe } from '../../pipes/lesson-info.pipe';
     MatMenuItem,
     MatMenuTrigger,
     NgForOf,
+    MatTooltip,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

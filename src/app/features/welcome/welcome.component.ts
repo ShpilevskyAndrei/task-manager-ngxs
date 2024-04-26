@@ -8,7 +8,7 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { MatAnchor, MatButton, MatIconButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import {AsyncPipe, NgForOf} from '@angular/common';
 import { MatSlider, MatSliderThumb } from '@angular/material/slider';
 
 import { Observable, of } from 'rxjs';
@@ -33,6 +33,7 @@ import { AuthService } from '../../core/services/requests/auth.service';
     AsyncPipe,
     MatSlider,
     MatSliderThumb,
+    NgForOf,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss',

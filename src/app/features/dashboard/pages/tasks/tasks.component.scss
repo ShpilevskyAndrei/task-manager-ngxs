@@ -46,6 +46,9 @@
   }
 
   table {
+    box-shadow: none;
+    border-top: 1px solid $color-grey;
+    border-bottom: 1px solid $color-grey;
     ::ng-deep thead {
       tr {
         color: $color-deep-purple;
@@ -59,5 +62,19 @@
         }
       }
     }
+  }
+
+  mat-paginator {
+    border-bottom: 1px solid $color-grey;
+  }
+
+  .two-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Количество отображаемых строк */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2em;
+    max-height: 2.4em; /* 2 строки по 1.2em каждая */
   }
 }

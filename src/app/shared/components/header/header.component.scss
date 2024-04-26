@@ -31,8 +31,10 @@
   }
 }
 
-.subtitle {
-  font-size: $font-size-11px;
-  color: $color-grey-default;
-  margin: 0 0 0 $offset-12px;
+.mat-menu {
+  &_subtitle {
+    font-size: $font-size-11px;
+    color: $color-grey-default;
+    margin: 0 0 0 $offset-12px;
+  }
 }

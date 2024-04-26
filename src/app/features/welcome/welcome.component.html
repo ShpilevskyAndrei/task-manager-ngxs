@@ -19,18 +19,12 @@
       </p>
       <div class="welcome__content__lesson_links">
         <a
-          [href]="courseConfig.lesson.workspaceCode"
+          *ngFor="let code of courseConfig.lesson.links.code"
+          [href]="code.url"
           target="_blank"
           mat-flat-button
         >
-          Workspace code
-        </a>
-        <a
-          [href]="courseConfig.lesson.solutionCommit"
-          target="_blank"
-          mat-flat-button
-        >
-          Solution commit
+          {{ code.name }}
         </a>
       </div>
       <a

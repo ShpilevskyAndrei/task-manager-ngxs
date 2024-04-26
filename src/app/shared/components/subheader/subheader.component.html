@@ -1,5 +1,7 @@
 <div class="subheader">
   <button
+    [matTooltip]="isSideMenuOpened() ? 'Hide sidenav' : 'Show sidenav'"
+    matTooltipPosition="right"
     [ngClass]="{
       'subheader_btn-rotate': !isSideMenuOpened()
     }"
