@@ -27,7 +27,7 @@ export class TasksService {
 
   public createTask(task: ITask): Observable<IResponse<ITask>> {
     return this._httpService
-      .post<ITask[]>(API, ENDPOINTS.tasks['createTask'], [task])
+      .post<ITask, ITask[]>(API, ENDPOINTS.tasks['createTask'], task)
       .pipe(
         map((): IResponse<ITask> => {
           return this._tasksController.createTaskControl(task);
@@ -37,7 +37,7 @@ export class TasksService {
 
   public editTask(task: ITask): Observable<IResponse<ITask>> {
     return this._httpService
-      .post<ITask[]>(API, ENDPOINTS.tasks['editTask'], [task])
+      .post<ITask, ITask[]>(API, ENDPOINTS.tasks['editTask'], task)
       .pipe(
         map((): IResponse<ITask> => {
           return this._tasksController.editTaskControl(task);

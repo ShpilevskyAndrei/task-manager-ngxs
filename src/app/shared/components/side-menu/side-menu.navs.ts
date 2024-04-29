@@ -2,7 +2,7 @@ export interface INav {
   title: string;
   path?: string;
   icon: string;
-  type?: 'main' | 'additional';
+  type?: 'main' | 'additional' | 'action';
 }
 
 export const sideMenuNavs: INav[] = [
@@ -19,8 +19,14 @@ export const sideMenuNavs: INav[] = [
     type: 'main',
   },
   {
+    title: 'My account',
+    path: 'user-info',
+    icon: 'person',
+    type: 'additional',
+  },
+  {
     title: 'Log out',
     icon: 'logout',
-    type: 'additional',
+    type: 'action',
   },
 ];

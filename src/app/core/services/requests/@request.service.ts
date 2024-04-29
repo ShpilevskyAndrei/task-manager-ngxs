@@ -20,13 +20,13 @@ export class RequestService {
     return this.http.get<T>(`${api}/${url}${param}`, options) as Observable<T>;
   }
 
-  public post<T>(
+  public post<T, E>(
     api: string,
     url: string,
-    body: T | null,
+    body?: T | null,
     options?: any,
-  ): Observable<T> {
-    return this.http.post<T>(`${api}/${url}`, body, options) as Observable<T>;
+  ): Observable<E> {
+    return this.http.post<T>(`${api}/${url}`, body, options) as Observable<E>;
   }
 
   public put<T>(

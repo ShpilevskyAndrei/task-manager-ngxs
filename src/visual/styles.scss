@@ -12,12 +12,8 @@ body {
 body {
   margin: 0;
   padding: 0;
-  background: rgb(27, 2, 242);
-  background: linear-gradient(
-    180deg,
-    rgba(27, 2, 242, 0.8) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: $color-blue;
+  background: $color-gradient-background-blue;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: $color-black-90;
 }

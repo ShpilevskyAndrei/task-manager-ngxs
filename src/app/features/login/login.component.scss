@@ -46,6 +46,10 @@
             height: 46px;
             background-color: $color-deep-purple;
             color: $color-white-default;
+            &:disabled {
+              background-color: $color-grey;
+              color: $color-grey-default
+            }
           }
         }
       }

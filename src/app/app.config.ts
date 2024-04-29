@@ -7,10 +7,11 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { TasksState } from './store/tasks/tasks.state';
-import { UsersState } from './store/users/users.state';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { states } from './shared/state';
+import { TOKENS_KEYS } from './core/constants/storage-keys';
 
 import { routes } from './app.routes';
 import { progressBarInterceptor } from './core/interceptors/progress-bar.interceptor';
@@ -23,8 +24,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([progressBarInterceptor])),
     importProvidersFrom(
-      NgxsModule.forRoot([UsersState, TasksState], {
+      NgxsModule.forRoot(states, {
         developmentMode: isDevMode(),
+      }),
+    ),
+    importProvidersFrom(
+      NgxsStoragePluginModule.forRoot({
+        key: TOKENS_KEYS,
       }),
     ),
     importProvidersFrom(NgxsReduxDevtoolsPluginModule.forRoot()),

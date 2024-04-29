@@ -1,2 +1,7 @@
-$header-height: 3.75rem;
-$content-width: 61.5rem;
+$header-height: 4rem;
+$subheader-height: 5rem;
+
+$dashboard-content-width: 61.5rem;
+$dashboard-content-height: calc(
+  100dvh - #{$header-height} - #{$subheader-height} * 2
+);

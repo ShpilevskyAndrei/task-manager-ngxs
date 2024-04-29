@@ -26,22 +26,26 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { NgIf } from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
 
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 
 import {
   CreateTask,
   EditTask,
-} from '../../../../../../store/tasks/tasks.actions';
+} from '../../../../../../shared/state/tasks/tasks.actions';
 import { ITask } from '../../../../../../core/interfaces/task.interface';
 import { TaskPrioritiesEnum } from '../../../../../../core/enums/task-priorities.enum';
 import { EnumToArrayPipe } from '../../../../../../shared/pipes/enum-to-array.pipe';
-import { IUser } from '../../../../../../core/interfaces/user.interface';
-import { UsersState } from '../../../../../../store/users/users.state';
+import {
+  IUser,
+  IUserWithoutPass,
+} from '../../../../../../core/interfaces/user.interface';
+import { UsersState } from '../../../../../../shared/state/users/users.state';
 import { TaskDialogTitlePipe } from './pipes/task-dialog-title.pipe';
 import { TaskDialogType } from './enums/task-dialog-type.enum';
 import { FirstLetterUppercasePipe } from '../../../../../../shared/pipes/first-letter-uppercase.pipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task-dialog',
@@ -62,15 +66,18 @@ import { FirstLetterUppercasePipe } from '../../../../../../shared/pipes/first-l
     TaskDialogTitlePipe,
     NgIf,
     FirstLetterUppercasePipe,
+    AsyncPipe,
   ],
   templateUrl: './task-dialog.component.html',
   styleUrl: './task-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskDialogComponent implements OnInit {
-  public taskForm!: FormGroup;
+  @Select(UsersState.getUsers) public users$?: Observable<
+    IUserWithoutPass[] | null
+  >;
 
-  public users: WritableSignal<IUser[] | null>;
+  public taskForm!: FormGroup;
 
   protected readonly TaskPrioritiesEnum = TaskPrioritiesEnum;
   protected readonly TaskDialogType = TaskDialogType;
@@ -82,11 +89,7 @@ export class TaskDialogComponent implements OnInit {
   public constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: { task: ITask; type: TaskDialogType },
-  ) {
-    this.users = toSignal(this._store.select(UsersState)) as WritableSignal<
-    IUser[] | null
-    >;
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.initTaskForm();

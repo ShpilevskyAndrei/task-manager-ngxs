@@ -28,8 +28,9 @@ import {
 import { SideMenuComponent } from '../../shared/components/side-menu/side-menu.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { SideMenuService } from '../../shared/components/side-menu/side-menu.service';
-import { GetUsers } from '../../store/users/users.actions';
+import { GetUsers } from '../../shared/state/users/users.actions';
 import { Store } from '@ngxs/store';
+import { GetUserInfo } from '../../shared/state/user/user.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -68,10 +69,15 @@ export class DashboardComponent implements OnInit {
   public ngOnInit(): void {
     this.trackPaths();
     this.dispatchGetUsers();
+    this.dispatchUserInfo();
   }
 
   private dispatchGetUsers(): void {
     this._store.dispatch(new GetUsers());
+  }
+
+  private dispatchUserInfo(): void {
+    this._store.dispatch(new GetUserInfo());
   }
 
   private trackPaths(): void {

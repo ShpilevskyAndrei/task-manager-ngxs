@@ -13,6 +13,7 @@ $color-deep-purple-light: rgba(91, 51, 174, 0.01);
 //other
 $color-blue-light: #f0f1ff;
 $color-blue-extra-light: #4971ff;
+$color-blue: rgb(27, 2, 242);
 $color-orange-light: #eaa238;
 $color-orange-extra-light: #faf7e3;
 $color-pink-light: #f2565c;
@@ -26,6 +27,11 @@ $color-gradient-deep-purple-easy: linear-gradient(
 $color-gradient-deep-purple-medium: linear-gradient(
   90deg,
   rgba(91, 51, 174, 0.2) 0%,
+  rgba(255, 255, 255, 1) 100%
+);
+$color-gradient-background-blue: linear-gradient(
+  180deg,
+  rgba(27, 2, 242, 0.8) 0%,
   rgba(255, 255, 255, 1) 100%
 );
 //filters

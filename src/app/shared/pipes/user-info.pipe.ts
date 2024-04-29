@@ -7,7 +7,7 @@ import { IUser } from '../../core/interfaces/user.interface';
   standalone: true,
 })
 export class UserInfoPipe implements PipeTransform {
-  public transform(userId: string, users: IUser[] | undefined): IUser | null {
+  public transform(userId: string, users: IUser[] | null): IUser | null {
     if (!users) return null;
 
     return users.find((user: IUser): boolean => user.id === userId) || null;

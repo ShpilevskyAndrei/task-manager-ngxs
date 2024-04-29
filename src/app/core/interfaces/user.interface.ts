@@ -4,4 +4,8 @@ export interface IUser {
   avatar: string;
   displayName: string;
   password?: string;
+  number: string;
+  jobTitle: string;
 }
+
+export interface IUserWithoutPass extends Omit<IUser, 'password'> {}

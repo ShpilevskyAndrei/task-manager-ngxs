@@ -23,7 +23,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Assignee</mat-label>
       <mat-select formControlName="userId">
-        @for (user of users(); track user.id) {
+        @for (user of users$ | async; track user.id) {
           <mat-option [value]="user.id">{{ user.displayName }}</mat-option>
         }
       </mat-select>

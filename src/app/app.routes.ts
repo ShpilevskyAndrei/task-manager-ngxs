@@ -44,6 +44,13 @@ export const routes: Routes = [
             (m) => m.UsersComponent,
           ),
       },
+      {
+        path: 'user-info',
+        loadComponent: () =>
+          import(
+            './features/dashboard/pages/user-info/user-info.component'
+          ).then((m) => m.UserInfoComponent),
+      },
     ],
   },
   {

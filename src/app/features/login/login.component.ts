@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
-  OnInit,
 } from '@angular/core';
 import {
   MatError,
@@ -27,12 +27,15 @@ import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgIf } from '@angular/common';
 
-import { first } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 import { IResponse } from '../../core/interfaces/@response.interface';
 import { AuthService } from '../../core/services/requests/auth.service';
 import { ITokens } from '../../core/interfaces/tokens.interface';
 import { ResponseStatusesEnum } from '../../core/enums/response-statuses.enum';
+import { Login } from '../../shared/state/auth/auth.actions';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatSnackBarDefaultConfig } from '../../core/configs/mat-snack-bar-default.config';
 
 @Component({
   selector: 'app-login',
@@ -55,9 +58,8 @@ import { ResponseStatusesEnum } from '../../core/enums/response-statuses.enum';
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public isPassVisible = false;
-  public isBtnDisabled = false;
 
   public loginForm: FormGroup = new FormGroup({
     email: new FormControl('JohnDoe@tasksystem.com', [
@@ -67,63 +69,47 @@ export class LoginComponent implements OnInit {
     password: new FormControl('randomPassword1', [Validators.required]),
   });
 
-  private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _snackBar = inject(MatSnackBar);
+  private readonly _store = inject(Store);
+  private readonly _destroyRef = inject(DestroyRef);
 
   public changePassVisibility(): void {
     this.isPassVisible = !this.isPassVisible;
   }
 
-  public ngOnInit(): void {
-    this.checkIsAuthorized();
-  }
-
   public login(): void {
     if (this.loginForm.invalid) return;
 
-    this.isBtnDisabled = true;
+    this._store
+      .dispatch(new Login(this.loginForm.getRawValue()))
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: (response: IResponse<ITokens>): void => {
+          if (this.checkIsLoginError(response)) {
+            this.showSnack(response.errorMessage!);
 
-    this._authService.login(this.loginForm.getRawValue()).subscribe({
-      next: (response: IResponse<ITokens>): void => {
-        if (
-          response.status === ResponseStatusesEnum.Error &&
-          response.errorMessage
-        ) {
-          this._snackBar.open(response.errorMessage, 'ОК', {
-            duration: 3000,
-            horizontalPosition: 'end',
-          });
+            return;
+          }
 
-          return;
-        }
+          this.navToDashboard();
+        },
+      });
+  }
 
-        this._router.navigate(['./dashboard']).then(() => {
-          this._snackBar.open('You are successfully logged in', 'ОК', {
-            duration: 3000,
-            horizontalPosition: 'end',
-          });
-        });
-      },
-      complete: (): void => {
-        this.isBtnDisabled = false;
-      },
+  private checkIsLoginError(response: IResponse<ITokens>): boolean {
+    return !!(
+      response.status === ResponseStatusesEnum.Error && response.errorMessage
+    );
+  }
+
+  private navToDashboard(): void {
+    this._router.navigate(['./dashboard']).then((): void => {
+      this.showSnack('You are successfully logged in');
     });
   }
 
-  private checkIsAuthorized(): void {
-    this._authService
-      .getIsAuthorized()
-      .pipe(first())
-      .subscribe((isAuth: boolean): void => {
-        if (isAuth) {
-          this._snackBar.open('You are already authorized', 'ОК', {
-            duration: 3000,
-            horizontalPosition: 'end',
-          });
-
-          void this._router.navigate(['/dashboard']);
-        }
-      });
+  private showSnack(message: string): void {
+    this._snackBar.open(message, 'ОК', MatSnackBarDefaultConfig);
   }
 }
