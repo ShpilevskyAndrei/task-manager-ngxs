@@ -117,6 +117,10 @@ export class TaskDialogComponent implements OnInit {
       .subscribe(() => this._dialogRef.close());
   }
 
+  public assignToMe(): void {
+    //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  }
+
   private initTaskForm(): void {
     this.taskForm = new FormGroup({
       id: new FormControl(''),
