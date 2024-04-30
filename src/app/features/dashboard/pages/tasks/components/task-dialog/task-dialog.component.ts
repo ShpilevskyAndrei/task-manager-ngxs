@@ -5,7 +5,6 @@ import {
   Inject,
   inject,
   OnInit,
-  WritableSignal,
 } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
@@ -24,9 +23,11 @@ import {
 } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { AsyncPipe, NgIf } from '@angular/common';
+
+import { first, Observable } from 'rxjs';
 
 import { Select, Store } from '@ngxs/store';
 
@@ -37,15 +38,11 @@ import {
 import { ITask } from '../../../../../../core/interfaces/task.interface';
 import { TaskPrioritiesEnum } from '../../../../../../core/enums/task-priorities.enum';
 import { EnumToArrayPipe } from '../../../../../../shared/pipes/enum-to-array.pipe';
-import {
-  IUser,
-  IUserWithoutPass,
-} from '../../../../../../core/interfaces/user.interface';
+import { IUserWithoutPass } from '../../../../../../core/interfaces/user.interface';
 import { UsersState } from '../../../../../../shared/state/users/users.state';
 import { TaskDialogTitlePipe } from './pipes/task-dialog-title.pipe';
 import { TaskDialogType } from './enums/task-dialog-type.enum';
 import { FirstLetterUppercasePipe } from '../../../../../../shared/pipes/first-letter-uppercase.pipe';
-import { first, Observable } from 'rxjs';
 import { UserState } from '../../../../../../shared/state/user/user.state';
 
 @Component({
