@@ -26,7 +26,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatOption, MatSelect } from '@angular/material/select';
-import {AsyncPipe, NgIf} from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 import { Select, Store } from '@ngxs/store';
 
@@ -45,7 +45,8 @@ import { UsersState } from '../../../../../../shared/state/users/users.state';
 import { TaskDialogTitlePipe } from './pipes/task-dialog-title.pipe';
 import { TaskDialogType } from './enums/task-dialog-type.enum';
 import { FirstLetterUppercasePipe } from '../../../../../../shared/pipes/first-letter-uppercase.pipe';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { UserState } from '../../../../../../shared/state/user/user.state';
 
 @Component({
   selector: 'app-task-dialog',
@@ -76,6 +77,9 @@ export class TaskDialogComponent implements OnInit {
   @Select(UsersState.getUsers) public users$?: Observable<
     IUserWithoutPass[] | null
   >;
+
+  @Select(UserState.getUserInfo)
+  public user$?: Observable<IUserWithoutPass | null>;
 
   public taskForm!: FormGroup;
 
@@ -118,7 +122,11 @@ export class TaskDialogComponent implements OnInit {
   }
 
   public assignToMe(): void {
-    //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    this.user$
+      ?.pipe(first())
+      .subscribe((userInfo: IUserWithoutPass | null): void => {
+        this.taskForm.controls['userId'].setValue(userInfo!.id);
+      });
   }
 
   private initTaskForm(): void {
