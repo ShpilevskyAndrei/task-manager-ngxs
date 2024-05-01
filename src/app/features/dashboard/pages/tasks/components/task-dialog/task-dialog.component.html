@@ -29,11 +29,20 @@
       </mat-select>
     </mat-form-field>
     <div class="form__assign">
-      @if (user$ | async; as user) {
-        @if (user.id !== taskForm.controls["userId"].value) {
-          <button class="form__assign_btn" (click)="assignToMe()">
-            assign to me
-          </button>
+      @if (data.type !== TaskDialogType.Read) {
+        @if (user$ | async; as user) {
+          @if (user.id) {
+            @if (user.id !== taskForm.controls["userId"].value) {
+              <button class="form__assign_btn" (click)="assignToMe()">
+                assign to me
+              </button>
+            } @else {
+              <button class="form__assign__assigned">
+                <mat-icon class="form__assign__assigned_check">check</mat-icon>
+                assigned to me
+              </button>
+            }
+          }
         }
       }
     </div>

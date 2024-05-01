@@ -28,6 +28,21 @@
           background-color: $color-deep-purple-easy;
         }
       }
+      &__assigned {
+        @include flex(row, center, center);
+        font-size: $font-size-13px;
+        font-weight: bold;
+        padding: $offset-4px $offset-12px;
+        border-radius: 24px;
+        color: $color-grey-default;
+        background-color: transparent;
+        z-index: 12;
+        border: none;
+        cursor: default;
+        &_check {
+
+        }
+      }
     }
   }
 

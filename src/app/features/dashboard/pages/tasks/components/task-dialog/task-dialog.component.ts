@@ -26,6 +26,7 @@ import { MatInput } from '@angular/material/input';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 import { first, Observable } from 'rxjs';
 
@@ -65,6 +66,7 @@ import { UserState } from '../../../../../../shared/state/user/user.state';
     NgIf,
     FirstLetterUppercasePipe,
     AsyncPipe,
+    MatIcon,
   ],
   templateUrl: './task-dialog.component.html',
   styleUrl: './task-dialog.component.scss',

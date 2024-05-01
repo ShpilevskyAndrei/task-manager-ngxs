@@ -19,9 +19,8 @@
 
       &__priority {
         border-radius: 24px;
-        min-width: 110px !important;
         display: inline-block;
-        padding: $offset-4px $offset-20px;
+        padding: $offset-4px $offset-16px;
         box-sizing: border-box;
         text-align: center;
         &-low {
