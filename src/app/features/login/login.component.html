@@ -1,0 +1,61 @@
+<main class="login-page">
+  <div class="login-page__content">
+    <div class="login-page__content__form-container">
+      <div class="login-page__content__form-container__btn-wrapper">
+        <a routerLink="../welcome" mat-icon-button>
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+      </div>
+      <h1 class="login-page__content__form-container_title">Login</h1>
+      <form
+        class="login-page__content__form-container__form"
+        [formGroup]="loginForm"
+      >
+        <mat-form-field
+          class="login-page__content__form-container__form_input"
+          appearance="outline"
+        >
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder="shpilevskiy.aa@gmail.com"
+          />
+          @if (
+            loginForm.controls["email"].hasError("required") ||
+            loginForm.controls["email"].hasError("email")
+          ) {
+            <mat-error>Format: example&#64;gmail.com</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field
+          class="login-page__content__form-container__form_input"
+          appearance="outline"
+        >
+          <mat-label>Password</mat-label>
+          <input
+            [type]="isPassVisible ? 'text' : 'password'"
+            matInput
+            formControlName="password"
+            placeholder="qwerty"
+          />
+          <mat-icon matSuffix (click)="changePassVisibility()">{{
+            isPassVisible ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          @if (loginForm.controls["password"].hasError("required")) {
+            <mat-error>Required field</mat-error>
+          }
+        </mat-form-field>
+        <button
+          class="login-page__content__form-container__form_button"
+          mat-flat-button
+          [disabled]="loginForm.invalid"
+          (click)="login()"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</main>

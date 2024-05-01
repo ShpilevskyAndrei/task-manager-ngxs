@@ -1,0 +1,39 @@
+<main class="user-info-page">
+  <app-subheader class="user-info-page__subheader" />
+
+  <div class="user-info-page__wrapper">
+    @if (userInfo$ | async; as userInfo) {
+      <div class="user-info-page__wrapper__user-info">
+        <img
+          class="user-info-page__wrapper__user-info_avatar"
+          [src]="userInfo.avatar"
+          alt="User Avatar"
+        />
+        <h2 class="user-info-page__wrapper__user-info_name">
+          {{ userInfo.displayName }}
+        </h2>
+        <p class="user-info-page__wrapper__user-info_job-title">
+          {{ userInfo.jobTitle }}
+        </p>
+        <p
+          class="user-info-page__wrapper__user-info_email"
+          matTooltip="Click to copy"
+          matTooltipPosition="right"
+          (mousedown)="copyToClipboard(userInfo.email)"
+        >
+          {{ userInfo.email }}
+        </p>
+        <p
+          class="user-info-page__wrapper__user-info_number"
+          matTooltip="Click to copy"
+          matTooltipPosition="right"
+          (mousedown)="copyToClipboard(userInfo.number)"
+        >
+          {{ userInfo.number }}
+        </p>
+      </div>
+    } @else {
+      <h3 class="user-info-page__wrapper_no-info">No user info</h3>
+    }
+  </div>
+</main>

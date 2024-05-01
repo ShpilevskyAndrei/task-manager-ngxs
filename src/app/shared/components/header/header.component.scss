@@ -1,0 +1,40 @@
+@import "../../../../visual/styles";
+
+:host {
+  mat-toolbar {
+    background-color: $color-white-default;
+    border-bottom: 1px solid $color-grey;
+  }
+
+  .header {
+    width: 100%;
+    z-index: 665;
+    &__toolbar {
+      display: flex;
+      gap: $offset-12px;
+      &_lesson-info {
+        font-size: $font-size-18px;
+        font-weight: normal;
+      }
+      &_env {
+        font-size: $font-size-13px;
+        font-weight: bold;
+        padding: 0 $offset-12px;
+        border-radius: 24px;
+        color: $color-deep-purple;
+        box-shadow: $box-shadow-light;
+      }
+      &_spacer {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+.mat-menu {
+  &_subtitle {
+    font-size: $font-size-11px;
+    color: $color-grey-default;
+    margin: 0 0 0 $offset-12px;
+  }
+}

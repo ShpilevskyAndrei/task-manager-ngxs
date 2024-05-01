@@ -1,0 +1,52 @@
+@import "../../../../../../../visual/styles";
+
+:host {
+  .title {
+    padding-left: $offset-24px;
+    padding-bottom: $offset-12px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    padding-top: $offset-12px;
+    &__assign {
+      @include flex(row, center, flex-end);
+      margin-top: -$offset-12px;
+      height: 24px;
+      &_btn {
+        font-size: $font-size-13px;
+        font-weight: bold;
+        padding: $offset-4px $offset-12px;
+        border-radius: 24px;
+        color: $color-deep-purple;
+        box-shadow: $box-shadow-light;
+        background-color: transparent;
+        z-index: 12;
+        border: none;
+        &:hover {
+          background-color: $color-deep-purple-easy;
+        }
+      }
+      &__assigned {
+        @include flex(row, center, center);
+        font-size: $font-size-13px;
+        font-weight: bold;
+        padding: $offset-4px $offset-12px;
+        border-radius: 24px;
+        color: $color-grey-default;
+        background-color: transparent;
+        z-index: 12;
+        border: none;
+        cursor: default;
+        &_check {
+
+        }
+      }
+    }
+  }
+
+  mat-dialog-actions {
+    padding: $offset-24px;
+  }
+}

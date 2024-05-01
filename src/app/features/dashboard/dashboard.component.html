@@ -1,0 +1,13 @@
+<mat-drawer-container autosize class="dashboard">
+  <mat-drawer
+    mode="side"
+    class="dashboard__drawer"
+    [opened]="isSideMenuOpened()"
+  >
+    <app-side-menu [activePath]="activeNav?.path" />
+  </mat-drawer>
+  <section class="dashboard__content-wrapper">
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </section>
+</mat-drawer-container>

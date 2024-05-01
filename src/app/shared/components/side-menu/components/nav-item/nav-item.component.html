@@ -1,0 +1,23 @@
+<ul class="nav">
+  <a
+    *ngIf="nav().path"
+    class="nav__link"
+    routerLink="{{ nav().path }}"
+    [ngClass]="{
+      'nav__link-active': isNavItemActive()
+    }"
+  >
+    <mat-icon class="nav__link_icon">{{ nav().icon }}</mat-icon>
+    <span class="nav__link_title">{{ nav().title }}</span>
+  </a>
+  <a
+    *ngIf="!nav().path"
+    class="nav__link"
+    tabindex="0"
+    (click)="onClickEmitter.emit()"
+    (keydown)="onClickEmitter.emit()"
+  >
+    <mat-icon class="nav__link_icon">{{ nav().icon }}</mat-icon>
+    <span class="nav__link_title">{{ nav().title }}</span>
+  </a>
+</ul>

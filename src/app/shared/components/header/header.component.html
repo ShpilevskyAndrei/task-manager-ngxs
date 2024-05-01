@@ -1,0 +1,46 @@
+<header class="header">
+  <mat-toolbar class="header__toolbar">
+    <span class="header__toolbar_lesson-info">{{
+      courseConfig | lessonInfo
+    }}</span>
+    <span class="header__toolbar_env">
+      {{ courseConfig.environment }}
+    </span>
+    <span class="header__toolbar_spacer"></span>
+    <button
+      matTooltip="Useful links"
+      matTooltipPosition="left"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>link</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <div class="mat-menu">
+        <p class="mat-menu_subtitle">Course links:</p>
+        <a
+          *ngFor="let link of courseConfig.info.links"
+          [href]="link.url"
+          target="_blank"
+          mat-menu-item
+          >{{ link.name }}</a
+        >
+        <p class="mat-menu_subtitle">Lesson links:</p>
+        <a
+          *ngFor="let link of courseConfig.lesson.links.code"
+          [href]="link.url"
+          target="_blank"
+          mat-menu-item
+          >{{ link.name }}</a
+        >
+        <p class="mat-menu_subtitle">NGXS links:</p>
+        <ng-container *ngFor="let techLink of courseConfig.techLinks">
+          <a [href]="techLink.url" target="_blank" mat-menu-item>{{
+            techLink.name
+          }}</a>
+        </ng-container>
+      </div>
+    </mat-menu>
+  </mat-toolbar>
+</header>

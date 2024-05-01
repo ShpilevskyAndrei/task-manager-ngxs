@@ -1,0 +1,14 @@
+@import "../../../../visual/styles";
+
+:host {
+  .subheader {
+    @include flex(row, center, flex-start);
+    margin: $offset-16px;
+    &_btn-rotate {
+      rotate: 180deg;
+    }
+    &_spacer {
+      flex: 1 1 auto;
+    }
+  }
+}

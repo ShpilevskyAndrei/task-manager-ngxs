@@ -1,0 +1,49 @@
+@import "../../../../../visual/styles";
+
+:host {
+  .user-info-page {
+    &__wrapper {
+      @include flex(row, center, center);
+      @include fixed-height($dashboard-content-height);
+      min-width: 100%;
+      &__user-info {
+        @include flex(column, center, center);
+        padding: $offset-52px;
+        box-shadow: $box-shadow-light;
+        border-radius: 12px;
+        &_avatar {
+          height: 30vh;
+          max-height: 300px;
+          box-shadow: $box-shadow-light;
+          border-radius: 12px;
+        }
+        &_name {
+          font-size: $font-size-39px;
+          margin-top: $offset-12px;
+        }
+        &_job-title {
+          margin-bottom: $offset-32px;
+        }
+        &_email {
+          cursor: pointer;
+          text-decoration: underline;
+          margin-bottom: $offset-8px;
+          &:hover {
+            color: $color-deep-purple;
+          }
+        }
+        &_number {
+          cursor: pointer;
+          text-decoration: underline;
+          &:hover {
+            color: $color-deep-purple;
+          }
+        }
+      }
+
+      &_no-info {
+        font-size: $font-size-39px;
+      }
+    }
+  }
+}

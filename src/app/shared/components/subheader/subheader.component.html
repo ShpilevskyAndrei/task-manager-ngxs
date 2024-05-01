@@ -1,0 +1,15 @@
+<div class="subheader">
+  <button
+    [matTooltip]="isSideMenuOpened() ? 'Hide sidenav' : 'Show sidenav'"
+    matTooltipPosition="right"
+    [ngClass]="{
+      'subheader_btn-rotate': !isSideMenuOpened()
+    }"
+    mat-icon-button
+    (click)="switchIsMenuOpened()"
+  >
+    <mat-icon> first_page </mat-icon>
+  </button>
+  <span class="subheader_spacer"></span>
+  <ng-content></ng-content>
+</div>

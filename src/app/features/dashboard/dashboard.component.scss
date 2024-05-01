@@ -1,0 +1,11 @@
+:host {
+  .dashboard {
+    min-width: 100vw;
+    min-height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    &__drawer {
+      min-width: 250px;
+    }
+  }
+}
