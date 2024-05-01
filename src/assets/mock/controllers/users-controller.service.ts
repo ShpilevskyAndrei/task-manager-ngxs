@@ -3,8 +3,8 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import {
   IUser,
   IUserWithoutPass,
-} from '../../../app/core/interfaces/user.interface';
-import { IResponse } from '../../../app/core/interfaces/@response.interface';
+} from '../../../app/core/interfaces/users/user.interface';
+import { IResponse } from '../../../app/core/interfaces/response.interface';
 import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.enum';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../../../app/shared/state/auth/auth.state';

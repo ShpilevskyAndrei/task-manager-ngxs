@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { HttpOptions } from '../../interfaces/http-options.interface';
+import { HttpOptions } from '../interfaces/http-options.interface';
 
 @Injectable({
   providedIn: 'root',

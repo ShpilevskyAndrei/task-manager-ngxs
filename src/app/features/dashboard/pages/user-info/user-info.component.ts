@@ -11,7 +11,7 @@ import { Select } from '@ngxs/store';
 import { UserState } from '../../../../shared/state/user/user.state';
 
 import { SubheaderComponent } from '../../../../shared/components/subheader/subheader.component';
-import { IUserWithoutPass } from '../../../../core/interfaces/user.interface';
+import { IUserWithoutPass } from '../../../../core/interfaces/users/user.interface';
 
 @Component({
   selector: 'app-user-info',

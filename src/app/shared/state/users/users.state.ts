@@ -5,9 +5,9 @@ import { Observable, tap } from 'rxjs';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { GetUsers } from './users.actions';
 
-import { IUserWithoutPass } from '../../../core/interfaces/user.interface';
-import { UserService } from '../../../core/services/requests/user.service';
-import { IResponse } from '../../../core/interfaces/@response.interface';
+import { IUserWithoutPass } from '../../../core/interfaces/users/user.interface';
+import { UserService } from '../../../core/services/user.service';
+import { IResponse } from '../../../core/interfaces/response.interface';
 
 export interface UsersStateModel {
   data: IUserWithoutPass[] | null;

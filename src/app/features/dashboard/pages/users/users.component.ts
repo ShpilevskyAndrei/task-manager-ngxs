@@ -11,5 +11,7 @@ import { SubheaderComponent } from '../../../../shared/components/subheader/subh
   styleUrl: './users.component.scss',
 })
 export class UsersComponent {
-  public openCreateUserDialog(): void {}
+  public openCreateUserDialog(): void {
+    //TODO. Make Logic
+  }
 }

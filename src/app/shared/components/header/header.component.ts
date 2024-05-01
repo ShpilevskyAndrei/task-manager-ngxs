@@ -5,13 +5,13 @@ import { MatIconButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import {
   COURSE_CONFIG_TOKEN,
   ICourseConfig,
 } from '../../../core/configs/course.config';
 import { LessonInfoPipe } from '../../pipes/lesson-info.pipe';
-import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-header',

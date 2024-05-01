@@ -3,10 +3,8 @@
 :host {
   .login-page {
     @include flex(column, center, center);
-    min-height: 100vh;
-    max-height: 100vh;
-    min-width: 100vw;
-    max-width: 100vw;
+    @include fixed-height(100vh);
+    @include fixed-width(100vw);
     &__content {
       @include flex(column, center, center);
       box-shadow: $box-shadow-light;
@@ -14,11 +12,9 @@
       border-radius: 12px;
       &__form-container {
         @include flex(column, flex-start, space-between);
-        min-width: 360px;
-        max-width: 360px;
+        @include fixed-width(360px);
         padding: $offset-52px;
         height: 100%;
-        width: 100%;
         &__btn-wrapper {
           margin: calc(-1 * $offset-16px) 0 $offset-16px calc(-1 * $offset-16px);
         }
@@ -48,7 +44,7 @@
             color: $color-white-default;
             &:disabled {
               background-color: $color-grey;
-              color: $color-grey-default
+              color: $color-grey-default;
             }
           }
         }

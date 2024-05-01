@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { ITokens } from '../../../app/core/interfaces/tokens.interface';
-import { IUser } from '../../../app/core/interfaces/user.interface';
-import { IResponse } from '../../../app/core/interfaces/@response.interface';
+import { ITokens } from '../../../app/core/interfaces/auth/tokens.interface';
+import { IUser } from '../../../app/core/interfaces/users/user.interface';
+import { IResponse } from '../../../app/core/interfaces/response.interface';
 import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.enum';
-import { IUserCredentials } from '../../../app/core/interfaces/user-credentials.interface';
+import { IUserCredentials } from '../../../app/core/interfaces/auth/user-credentials.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthControllerService {

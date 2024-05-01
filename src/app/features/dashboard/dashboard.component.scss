@@ -1,9 +1,9 @@
+@import "../../../visual/styles";
+
 :host {
   .dashboard {
-    min-width: 100vw;
-    min-height: 100dvh;
-    max-width: 100vw;
-    max-height: 100dvh;
+    @include fixed-width(100vw);
+    @include fixed-height(100vh);
     &__drawer {
       min-width: 250px;
     }

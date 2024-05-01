@@ -15,7 +15,7 @@
       <mat-label>Priority</mat-label>
       <mat-select formControlName="priority">
         @for (option of TaskPrioritiesEnum | enumToArray; track option) {
-          <mat-option [value]="option">{{ option }}</mat-option>
+          <mat-option [value]="option">{{ option | priority }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

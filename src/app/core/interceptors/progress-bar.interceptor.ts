@@ -9,19 +9,18 @@ import { inject } from '@angular/core';
 import { catchError, delay, Observable, throwError } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { ProgressBarStateService } from '../services/progress-bar-state.service';
-import { generateRandomDelay } from '../../shared/helpers/generate-random-delay';
+import { ProgressBarService } from '../../shared/components/progress-bar/progress-bar.service';
 
 export const progressBarInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<any>> => {
-  const progressBarService = inject(ProgressBarStateService);
+  const progressBarService = inject(ProgressBarService);
 
   progressBarService.showSpinner();
 
   return next(req).pipe(
-    delay(generateRandomDelay()), // response delay imitation
+    delay(Math.floor(Math.random() * 1500) + 1), // response delay imitation
     catchError((error) => {
       progressBarService.hideSpinner();
 

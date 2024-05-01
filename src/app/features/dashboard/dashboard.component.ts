@@ -21,6 +21,8 @@ import { AsyncPipe } from '@angular/common';
 
 import { filter } from 'rxjs';
 
+import { Store } from '@ngxs/store';
+
 import {
   INav,
   sideMenuNavs,
@@ -29,7 +31,6 @@ import { SideMenuComponent } from '../../shared/components/side-menu/side-menu.c
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { SideMenuService } from '../../shared/components/side-menu/side-menu.service';
 import { GetUsers } from '../../shared/state/users/users.actions';
-import { Store } from '@ngxs/store';
 import { GetUserInfo } from '../../shared/state/user/user.actions';
 
 @Component({
@@ -68,6 +69,7 @@ export class DashboardComponent implements OnInit {
 
   public ngOnInit(): void {
     this.trackPaths();
+
     this.dispatchGetUsers();
     this.dispatchUserInfo();
   }

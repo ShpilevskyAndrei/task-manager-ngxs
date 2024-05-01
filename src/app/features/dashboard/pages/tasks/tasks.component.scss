@@ -11,9 +11,15 @@
     &__table {
       &__user_row {
         @include flex(row, center, flex-start);
-        img {
-          height: 32px;
+        &_img-container {
+          @include flex(row, center, flex-start);
+          @include fixed-height(32px);
+          @include fixed-width(32px);
           margin-right: $offset-8px;
+          img {
+            @include fixed-height(32px);
+            @include fixed-width(32px);
+          }
         }
       }
 
@@ -35,12 +41,20 @@
           background-color: $color-pink-extra-light;
           color: $color-pink-light;
         }
+        &-unknown {
+          background-color: $color-grey;
+          color: $color-grey-default;
+        }
       }
     }
 
-    &_no-tasks {
-      font-size: $font-size-24px;
-      margin-left: $offset-16px;
+    &__no-tasks {
+      @include flex(row, center, center);
+      @include fixed-height($dashboard-content-height);
+      min-width: 100%;
+      &_text {
+        font-size: $font-size-39px;
+      }
     }
   }
 
@@ -70,10 +84,10 @@
   .two-lines {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Количество отображаемых строк */
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.2em;
-    max-height: 2.4em; /* 2 строки по 1.2em каждая */
+    max-height: 2.4em;
   }
 }

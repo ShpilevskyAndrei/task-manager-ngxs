@@ -26,16 +26,14 @@ import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgIf } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Store } from '@ngxs/store';
 
-import { IResponse } from '../../core/interfaces/@response.interface';
-import { AuthService } from '../../core/services/requests/auth.service';
-import { ITokens } from '../../core/interfaces/tokens.interface';
+import { IResponse } from '../../core/interfaces/response.interface';
+import { ITokens } from '../../core/interfaces/auth/tokens.interface';
 import { ResponseStatusesEnum } from '../../core/enums/response-statuses.enum';
 import { Login } from '../../shared/state/auth/auth.actions';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatSnackBarDefaultConfig } from '../../core/configs/mat-snack-bar-default.config';
 
 @Component({
   selector: 'app-login',
@@ -60,22 +58,15 @@ import { MatSnackBarDefaultConfig } from '../../core/configs/mat-snack-bar-defau
 })
 export class LoginComponent {
   public isPassVisible = false;
-
-  public loginForm: FormGroup = new FormGroup({
-    email: new FormControl('JohnDoe@tasksystem.com', [
-      Validators.required,
-      Validators.email,
-    ]),
-    password: new FormControl('randomPassword1', [Validators.required]),
-  });
+  public loginForm!: FormGroup;
 
   private readonly _router = inject(Router);
   private readonly _snackBar = inject(MatSnackBar);
   private readonly _store = inject(Store);
   private readonly _destroyRef = inject(DestroyRef);
 
-  public changePassVisibility(): void {
-    this.isPassVisible = !this.isPassVisible;
+  public constructor() {
+    this.initLoginForm();
   }
 
   public login(): void {
@@ -97,6 +88,26 @@ export class LoginComponent {
       });
   }
 
+  public changePassVisibility(): void {
+    this.isPassVisible = !this.isPassVisible;
+  }
+
+  private initLoginForm(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
+
+    this.patchCredentials();
+  }
+
+  private patchCredentials(): void {
+    this.loginForm.patchValue({
+      email: 'JohnDoe@tasksystem.com',
+      password: 'randomPassword1',
+    });
+  }
+
   private checkIsLoginError(response: IResponse<ITokens>): boolean {
     return !!(
       response.status === ResponseStatusesEnum.Error && response.errorMessage
@@ -110,6 +121,9 @@ export class LoginComponent {
   }
 
   private showSnack(message: string): void {
-    this._snackBar.open(message, 'ОК', MatSnackBarDefaultConfig);
+    this._snackBar.open(message, 'ОК', {
+      duration: 3000,
+      horizontalPosition: 'end',
+    });
   }
 }

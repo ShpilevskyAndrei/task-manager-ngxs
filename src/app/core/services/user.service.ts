@@ -3,10 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable, switchMap } from 'rxjs';
 
 import { RequestService } from './@request.service';
-import { IUser, IUserWithoutPass } from '../../interfaces/user.interface';
-import { API, ENDPOINTS } from '../../constants/endpoints';
-import { IResponse } from '../../interfaces/@response.interface';
-import { UsersControllerService } from '../../../../assets/mock/controllers/users-controller.service';
+import { IUser, IUserWithoutPass } from '../interfaces/users/user.interface';
+import { API, ENDPOINTS } from '../constants/endpoints';
+import { IResponse } from '../interfaces/response.interface';
+import { UsersControllerService } from '../../../assets/mock/controllers/users-controller.service';
 
 @Injectable({
   providedIn: 'root',

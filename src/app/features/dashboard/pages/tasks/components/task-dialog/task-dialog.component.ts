@@ -36,15 +36,16 @@ import {
   CreateTask,
   EditTask,
 } from '../../../../../../shared/state/tasks/tasks.actions';
-import { ITask } from '../../../../../../core/interfaces/task.interface';
-import { TaskPrioritiesEnum } from '../../../../../../core/enums/task-priorities.enum';
+import { ITask } from '../../../../../../core/interfaces/tasks/task.interface';
+import { TaskPriorityIdEnum } from '../../enums/task-priority-id.enum';
 import { EnumToArrayPipe } from '../../../../../../shared/pipes/enum-to-array.pipe';
-import { IUserWithoutPass } from '../../../../../../core/interfaces/user.interface';
+import { IUserWithoutPass } from '../../../../../../core/interfaces/users/user.interface';
 import { UsersState } from '../../../../../../shared/state/users/users.state';
 import { TaskDialogTitlePipe } from './pipes/task-dialog-title.pipe';
 import { TaskDialogType } from './enums/task-dialog-type.enum';
 import { FirstLetterUppercasePipe } from '../../../../../../shared/pipes/first-letter-uppercase.pipe';
 import { UserState } from '../../../../../../shared/state/user/user.state';
+import { PriorityPipe } from '../../pipes/priority.pipe';
 
 @Component({
   selector: 'app-task-dialog',
@@ -67,6 +68,7 @@ import { UserState } from '../../../../../../shared/state/user/user.state';
     FirstLetterUppercasePipe,
     AsyncPipe,
     MatIcon,
+    PriorityPipe,
   ],
   templateUrl: './task-dialog.component.html',
   styleUrl: './task-dialog.component.scss',
@@ -74,7 +76,7 @@ import { UserState } from '../../../../../../shared/state/user/user.state';
 })
 export class TaskDialogComponent implements OnInit {
   @Select(UsersState.getUsers) public users$?: Observable<
-  IUserWithoutPass[] | null
+    IUserWithoutPass[] | null
   >;
 
   @Select(UserState.getUserInfo)
@@ -82,7 +84,7 @@ export class TaskDialogComponent implements OnInit {
 
   public taskForm!: FormGroup;
 
-  protected readonly TaskPrioritiesEnum = TaskPrioritiesEnum;
+  protected readonly TaskPrioritiesEnum = TaskPriorityIdEnum;
   protected readonly TaskDialogType = TaskDialogType;
 
   private readonly _store = inject(Store);
@@ -133,7 +135,7 @@ export class TaskDialogComponent implements OnInit {
       date: new FormControl(new Date(), [Validators.required]),
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', []),
-      priority: new FormControl(TaskPrioritiesEnum.Medium, [
+      priority: new FormControl(TaskPriorityIdEnum.Medium, [
         Validators.required,
       ]),
       userId: new FormControl('', [Validators.required]),
@@ -154,7 +156,9 @@ export class TaskDialogComponent implements OnInit {
       new FormControl(this.data.task.id, Validators.required),
     );
 
-    const task: ITask = { ...this.data.task };
+    const task: Partial<ITask> = {
+      ...this.data.task,
+    } as Exclude<ITask, 'date'>;
 
     delete task.date;
 

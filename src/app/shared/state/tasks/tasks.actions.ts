@@ -1,4 +1,4 @@
-import { ITask } from '../../../core/interfaces/task.interface';
+import { ITask } from '../../../core/interfaces/tasks/task.interface';
 
 export class GetTasks {
   public static readonly type = '[TASKS] Get all tasks';

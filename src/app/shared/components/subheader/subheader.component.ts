@@ -7,9 +7,9 @@ import {
 import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { SideMenuService } from '../side-menu/side-menu.service';
-import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-subheader',

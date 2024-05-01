@@ -3,10 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { RequestService } from './@request.service';
-import { API, ENDPOINTS } from '../../constants/endpoints';
-import { IResponse } from '../../interfaces/@response.interface';
-import { ITask } from '../../interfaces/task.interface';
-import { TasksControllerService } from '../../../../assets/mock/controllers/tasks-controller.service';
+import { API, ENDPOINTS } from '../constants/endpoints';
+import { IResponse } from '../interfaces/response.interface';
+import { ITask } from '../interfaces/tasks/task.interface';
+import { TasksControllerService } from '../../../assets/mock/controllers/tasks-controller.service';
 
 @Injectable({
   providedIn: 'root',

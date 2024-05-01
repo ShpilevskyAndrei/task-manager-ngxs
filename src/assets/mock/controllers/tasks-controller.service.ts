@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { IResponse } from '../../../app/core/interfaces/@response.interface';
-import { ITask } from '../../../app/core/interfaces/task.interface';
+import { IResponse } from '../../../app/core/interfaces/response.interface';
+import { ITask } from '../../../app/core/interfaces/tasks/task.interface';
 import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.enum';
 
 @Injectable({ providedIn: 'root' })

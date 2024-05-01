@@ -8,10 +8,9 @@ import { Store } from '@ngxs/store';
 
 import { NavItemComponent } from './components/nav-item/nav-item.component';
 import { INav, sideMenuNavs } from './side-menu.navs';
-import { IResponse } from '../../../core/interfaces/@response.interface';
+import { IResponse } from '../../../core/interfaces/response.interface';
 import { Logout } from '../../state/auth/auth.actions';
 import { ResponseStatusesEnum } from '../../../core/enums/response-statuses.enum';
-import { MatSnackBarDefaultConfig } from '../../../core/configs/mat-snack-bar-default.config';
 
 @Component({
   selector: 'app-side-menu',
@@ -60,6 +59,9 @@ export class SideMenuComponent {
   }
 
   private showSnack(message: string): void {
-    this._snackBar.open(message, 'ОК', MatSnackBarDefaultConfig);
+    this._snackBar.open(message, 'ОК', {
+      duration: 3000,
+      horizontalPosition: 'end',
+    });
   }
 }

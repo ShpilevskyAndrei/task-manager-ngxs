@@ -42,16 +42,14 @@
           <td mat-cell *matCellDef="let element">
             <span
               class="tasks-page__table__priority"
-              [class]="element.priority | priorityClass"
-              >{{ element.priority }}</span
+              [class]="element.priority | priority | priorityClass"
+              >{{ element.priority | priority }}</span
             >
           </td>
         </ng-container>
 
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>
-            Date
-          </th>
+          <th mat-header-cell *matHeaderCellDef>Date</th>
           <td mat-cell *matCellDef="let element">
             {{ element.date | date }}
           </td>
@@ -61,18 +59,20 @@
           <th mat-header-cell *matHeaderCellDef>User</th>
           <td mat-cell *matCellDef="let element">
             @if (users$ | async; as users) {
-              <span class="tasks-page__table__user_row">
-                <img
-                  src="{{ (element.userId | userInfo: users)?.avatar }}"
-                  alt="avatar"
-                />
+              <div class="tasks-page__table__user_row">
+                <div class="tasks-page__table__user_row_img-container">
+                  <img
+                    src="{{ (element.userId | userInfo: users)?.avatar }}"
+                    alt="avatar"
+                  />
+                </div>
                 <span>
                   {{
                     (element.userId | userInfo: users)?.displayName ||
                       element.userId
                   }}
                 </span>
-              </span>
+              </div>
             } @else {
               {{ element.userId }}
             }
@@ -103,14 +103,16 @@
           (click)="openTaskInfo(row)"
         ></tr>
       </table>
+
+      <mat-paginator
+        [ngStyle]="{ display: (tasks$ | async)?.length ? 'block' : 'none' }"
+        [pageSize]="pageSize"
+        aria-label="Select page of users"
+      ></mat-paginator>
     } @else {
-      <p class="tasks-page_no-tasks">There are no tasks</p>
+      <div class="tasks-page__no-tasks">
+        <p class="tasks-page__no-tasks_text">There are no tasks</p>
+      </div>
     }
   }
-
-  <mat-paginator
-    [ngStyle]="{ display: (tasks$ | async)?.length ? 'block' : 'none' }"
-    [pageSize]="pageSize"
-    aria-label="Select page of users"
-  ></mat-paginator>
 </main>

@@ -31,8 +31,8 @@ import { Observable, tap } from 'rxjs';
 
 import { Select, Store } from '@ngxs/store';
 
-import { ITask } from '../../../../core/interfaces/task.interface';
-import { IUserWithoutPass } from '../../../../core/interfaces/user.interface';
+import { ITask } from '../../../../core/interfaces/tasks/task.interface';
+import { IUserWithoutPass } from '../../../../core/interfaces/users/user.interface';
 import {
   DeleteTask,
   GetTasks,
@@ -43,8 +43,9 @@ import { UsersState } from '../../../../shared/state/users/users.state';
 import { UserInfoPipe } from '../../../../shared/pipes/user-info.pipe';
 import { SubheaderComponent } from '../../../../shared/components/subheader/subheader.component';
 import { TaskDialogType } from './components/task-dialog/enums/task-dialog-type.enum';
-import { tasksTableColumns } from './tasks-columns';
+import { tasksTableColumns } from './constants/tasks-columns';
 import { PriorityClassPipe } from './pipes/priority-class.pipe';
+import {PriorityPipe} from "./pipes/priority.pipe";
 
 @Component({
   selector: 'app-tasks',
@@ -75,6 +76,7 @@ import { PriorityClassPipe } from './pipes/priority-class.pipe';
     PriorityClassPipe,
     MatSort,
     MatSortHeader,
+    PriorityPipe,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -84,7 +86,7 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator | null = null;
 
   @Select(UsersState.getUsers) public users$?: Observable<
-  IUserWithoutPass[] | null
+    IUserWithoutPass[] | null
   >;
 
   public tasks$?: Observable<ITask[] | null>;
@@ -99,7 +101,6 @@ export class TasksComponent implements OnInit {
 
   public ngOnInit(): void {
     this.dispatchGetTasks();
-
     this.defineTasks();
   }
 

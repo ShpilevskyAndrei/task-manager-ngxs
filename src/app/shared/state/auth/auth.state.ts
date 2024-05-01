@@ -6,9 +6,9 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Login, Logout } from './auth.actions';
 import { DeleteUserInfo, GetUserInfo } from '../user/user.actions';
 
-import { ITokens } from '../../../core/interfaces/tokens.interface';
-import { AuthService } from '../../../core/services/requests/auth.service';
-import { IResponse } from '../../../core/interfaces/@response.interface';
+import { ITokens } from '../../../core/interfaces/auth/tokens.interface';
+import { AuthService } from '../../../core/services/auth.service';
+import { IResponse } from '../../../core/interfaces/response.interface';
 
 export interface AuthStateModel {
   data: ITokens | null;

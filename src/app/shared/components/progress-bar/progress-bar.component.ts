@@ -10,7 +10,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { ProgressBarStateService } from '../../../core/services/progress-bar-state.service';
+import { ProgressBarService } from './progress-bar.service';
 
 @Component({
   selector: 'app-progress-bar',
@@ -23,7 +23,7 @@ import { ProgressBarStateService } from '../../../core/services/progress-bar-sta
 export class ProgressBarComponent implements AfterViewInit {
   public loaderState?: boolean;
 
-  private readonly _progressBarStateService = inject(ProgressBarStateService);
+  private readonly _progressBarStateService = inject(ProgressBarService);
   private readonly _cdr = inject(ChangeDetectorRef);
   private readonly _destroyRef = inject(DestroyRef);
 

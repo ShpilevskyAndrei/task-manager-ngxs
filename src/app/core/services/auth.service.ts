@@ -3,12 +3,12 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { RequestService } from './@request.service';
-import { IUser } from '../../interfaces/user.interface';
-import { ITokens } from '../../interfaces/tokens.interface';
-import { IUserCredentials } from '../../interfaces/user-credentials.interface';
-import { API, ENDPOINTS } from '../../constants/endpoints';
-import { AuthControllerService } from '../../../../assets/mock/controllers/auth-controller.service';
-import { IResponse } from '../../interfaces/@response.interface';
+import { IUser } from '../interfaces/users/user.interface';
+import { ITokens } from '../interfaces/auth/tokens.interface';
+import { IUserCredentials } from '../interfaces/auth/user-credentials.interface';
+import { API, ENDPOINTS } from '../constants/endpoints';
+import { AuthControllerService } from '../../../assets/mock/controllers/auth-controller.service';
+import { IResponse } from '../interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root',

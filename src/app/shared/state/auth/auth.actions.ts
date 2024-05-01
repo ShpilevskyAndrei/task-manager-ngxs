@@ -1,4 +1,4 @@
-import { IUserCredentials } from '../../../core/interfaces/user-credentials.interface';
+import { IUserCredentials } from '../../../core/interfaces/auth/user-credentials.interface';
 
 export class Login {
   public static readonly type = '[Auth] Login';

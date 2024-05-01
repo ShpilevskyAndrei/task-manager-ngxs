@@ -5,9 +5,9 @@ import { Observable, tap } from 'rxjs';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { CreateTask, DeleteTask, EditTask, GetTasks } from './tasks.actions';
 
-import { TasksService } from '../../../core/services/requests/tasks.service';
-import { ITask } from '../../../core/interfaces/task.interface';
-import { IResponse } from '../../../core/interfaces/@response.interface';
+import { TasksService } from '../../../core/services/tasks.service';
+import { ITask } from '../../../core/interfaces/tasks/task.interface';
+import { IResponse } from '../../../core/interfaces/response.interface';
 
 export interface TasksStateModel {
   data: ITask[] | null;

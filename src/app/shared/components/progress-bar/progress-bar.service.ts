@@ -5,7 +5,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ProgressBarStateService {
+export class ProgressBarService {
   private _spinnerState$: BehaviorSubject<number> = new BehaviorSubject<number>(
     0,
   );

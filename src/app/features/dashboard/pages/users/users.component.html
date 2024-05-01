@@ -1,7 +1,7 @@
-<main class="tasks-page">
-  <app-subheader class="tasks-page__subheader">
+<main class="users-page">
+  <app-subheader class="users-page__subheader">
     <button
-      class="tasks-page__subheader_btn"
+      class="users-page__subheader_btn"
       mat-raised-button
       color="primary"
       (click)="openCreateUserDialog()"
@@ -10,5 +10,9 @@
     </button>
   </app-subheader>
 
-
+  <div class="users-page__no-tasks">
+    <p class="users-page__no-tasks_text">
+      There are no users or u didn't display them
+    </p>
+  </div>
 </main>

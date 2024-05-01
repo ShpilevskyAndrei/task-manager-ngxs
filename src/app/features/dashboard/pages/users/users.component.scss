@@ -1,0 +1,20 @@
+@import "../../../../../visual/styles";
+
+:host {
+  .users-page {
+    &__subheader {
+      &_btn {
+        justify-self: flex-end;
+      }
+    }
+
+    &__no-tasks {
+      @include flex(row, center, center);
+      @include fixed-height($dashboard-content-height);
+      min-width: 100%;
+      &_text {
+        font-size: $font-size-39px;
+      }
+    }
+  }
+}

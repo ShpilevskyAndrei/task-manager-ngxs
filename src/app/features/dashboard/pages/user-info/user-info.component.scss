@@ -12,8 +12,7 @@
         box-shadow: $box-shadow-light;
         border-radius: 12px;
         &_avatar {
-          height: 30vh;
-          max-height: 300px;
+          @include fixed-height(300px);
           box-shadow: $box-shadow-light;
           border-radius: 12px;
         }
