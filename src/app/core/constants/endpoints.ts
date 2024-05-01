@@ -1,4 +1,4 @@
-export const API = 'assets/mock/data';
+export const API = 'http://localhost:3000';
 
 export enum GatewaysEnum {
   Auth = 'auth',
@@ -9,19 +9,19 @@ export enum GatewaysEnum {
 
 export const ENDPOINTS: Record<GatewaysEnum, { [key: string]: string }> = {
   [GatewaysEnum.Auth]: {
-    login: 'users.json',
-    logout: 'users.json',
+    login: 'users',
+    logout: 'users',
   },
   [GatewaysEnum.User]: {
-    getUserInfo: 'users.json',
+    getUserInfo: 'users',
   },
   [GatewaysEnum.Users]: {
-    getUsers: 'users.json',
+    getUsers: 'users',
   },
   [GatewaysEnum.Tasks]: {
-    getTasks: 'tasks.json',
-    createTask: 'tasks.json',
-    editTask: 'tasks.json',
-    deleteTask: 'tasks.json',
+    getTasks: 'tasks',
+    createTask: 'tasks',
+    editTask: 'tasks',
+    deleteTask: 'tasks',
   },
-} as const;
+};

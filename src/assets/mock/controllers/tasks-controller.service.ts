@@ -8,14 +8,11 @@ import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.
 export class TasksControllerService {
   public getTaskListControl(tasks: ITask[]): IResponse<ITask[]> {
     return { status: ResponseStatusesEnum.Success, data: tasks } as IResponse<
-      ITask[]
+    ITask[]
     >;
   }
 
   public createTaskControl(task: ITask): IResponse<ITask> {
-    task.id = Math.floor(Math.random() * 1000000).toString();
-    task.date = new Date();
-
     return {
       status: ResponseStatusesEnum.Success,
       data: task,
@@ -32,7 +29,7 @@ export class TasksControllerService {
   public deleteTaskByIdControl(taskId: string): IResponse<boolean> {
     return {
       status: ResponseStatusesEnum.Success,
-      data: true,
+      data: !!taskId,
     } as IResponse<boolean>;
   }
 }

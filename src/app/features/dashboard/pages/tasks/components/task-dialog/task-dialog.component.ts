@@ -74,7 +74,7 @@ import { UserState } from '../../../../../../shared/state/user/user.state';
 })
 export class TaskDialogComponent implements OnInit {
   @Select(UsersState.getUsers) public users$?: Observable<
-    IUserWithoutPass[] | null
+  IUserWithoutPass[] | null
   >;
 
   @Select(UserState.getUserInfo)
@@ -101,7 +101,7 @@ export class TaskDialogComponent implements OnInit {
   public createTask(): void {
     if (this.taskForm.invalid) return;
 
-    const task: ITask = this.taskForm.getRawValue();
+    const task: Exclude<ITask, 'id'> = this.taskForm.getRawValue();
 
     this._store
       .dispatch(new CreateTask(task))
@@ -130,8 +130,7 @@ export class TaskDialogComponent implements OnInit {
 
   private initTaskForm(): void {
     this.taskForm = new FormGroup({
-      id: new FormControl(''),
-      data: new FormControl(''),
+      date: new FormControl(new Date(), [Validators.required]),
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', []),
       priority: new FormControl(TaskPrioritiesEnum.Medium, [
@@ -141,11 +140,24 @@ export class TaskDialogComponent implements OnInit {
     });
 
     if (this.data.type !== TaskDialogType.Create) {
-      this.taskForm.patchValue(this.data.task);
+      this.patchValue();
     }
 
     if (this.data.type === TaskDialogType.Read) {
       this.taskForm.disable();
     }
+  }
+
+  private patchValue(): void {
+    this.taskForm.addControl(
+      'id',
+      new FormControl(this.data.task.id, Validators.required),
+    );
+
+    const task: ITask = { ...this.data.task };
+
+    delete task.date;
+
+    this.taskForm.patchValue(task);
   }
 }

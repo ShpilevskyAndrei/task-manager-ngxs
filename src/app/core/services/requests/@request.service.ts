@@ -3,39 +3,43 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { HttpOptions } from '../../interfaces/http-options.interface';
+
 @Injectable({
   providedIn: 'root',
 })
 export class RequestService {
-  public constructor(private http: HttpClient) {}
+  public constructor(private readonly _http: HttpClient) {}
 
   public get<T>(
     api: string,
     url: string,
     params?: HttpParams,
-    options?: any,
+    options: HttpOptions = {},
   ): Observable<T> {
-    const param = params ? `?${params.toString()}` : '';
+    if (params) {
+      options.params = params;
+    }
 
-    return this.http.get<T>(`${api}/${url}${param}`, options) as Observable<T>;
+    return this._http.get<T>(`${api}/${url}`, options);
   }
 
-  public post<T, E>(
+  public post<T>(
     api: string,
     url: string,
     body?: T | null,
-    options?: any,
-  ): Observable<E> {
-    return this.http.post<T>(`${api}/${url}`, body, options) as Observable<E>;
+    options: HttpOptions = {},
+  ): Observable<T> {
+    return this._http.post<T>(`${api}/${url}`, body, options);
   }
 
   public put<T>(
     api: string,
     url: string,
     body?: T | null,
-    options?: any,
+    options: HttpOptions = {},
   ): Observable<T> {
-    return this.http.put<T>(`${api}/${url}`, body, options) as Observable<T>;
+    return this._http.put<T>(`${api}/${url}`, body, options);
   }
 
   public patch<T>(
@@ -43,16 +47,21 @@ export class RequestService {
     url: string,
     body: T | null,
     id?: string,
-    options?: any,
+    options: HttpOptions = {},
   ): Observable<T> {
-    return this.http.patch<T>(
-      `${api}/${url}${id}`,
-      body,
-      options,
-    ) as Observable<T>;
+    const fullUrl = id ? `${api}/${url}/${id}` : `${api}/${url}`;
+
+    return this._http.patch<T>(fullUrl, body, options);
   }
 
-  public delete<T>(api: string, url: string, options?: any): Observable<T> {
-    return this.http.delete<T>(`${api}/${url}`, options) as Observable<T>;
+  public delete<T>(
+    api: string,
+    url: string,
+    id?: string,
+    options: HttpOptions = {},
+  ): Observable<T> {
+    const fullUrl = id ? `${api}/${url}/${id}` : `${api}/${url}`;
+
+    return this._http.delete<T>(fullUrl, options);
   }
 }

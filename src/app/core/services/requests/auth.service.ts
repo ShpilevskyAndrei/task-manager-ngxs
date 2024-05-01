@@ -20,25 +20,18 @@ export class AuthService {
   public login(
     loginRequestBody: IUserCredentials,
   ): Observable<IResponse<ITokens>> {
-    return this._httpService
-      .post<
-        IUserCredentials,
-        IUser[]
-      >(API, ENDPOINTS.auth['login'], loginRequestBody)
-      .pipe(
-        map((users: IUser[]): IResponse<ITokens> => {
-          return this._authServiceHelper.loginControl(loginRequestBody, users);
-        }),
-      );
+    return this._httpService.get<IUser[]>(API, ENDPOINTS.auth['login']).pipe(
+      map((users: IUser[]): IResponse<ITokens> => {
+        return this._authServiceHelper.loginControl(loginRequestBody, users);
+      }),
+    );
   }
 
   public logout(): Observable<IResponse<boolean>> {
-    return this._httpService
-      .post<never, boolean>(API, ENDPOINTS.auth['logout'])
-      .pipe(
-        map((): IResponse<boolean> => {
-          return this._authServiceHelper.logoutControl();
-        }),
-      );
+    return this._httpService.get<boolean>(API, ENDPOINTS.auth['logout']).pipe(
+      map((): IResponse<boolean> => {
+        return this._authServiceHelper.logoutControl();
+      }),
+    );
   }
 }

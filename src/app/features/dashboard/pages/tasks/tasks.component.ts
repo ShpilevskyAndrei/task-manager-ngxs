@@ -29,7 +29,7 @@ import { MatSort, MatSortHeader } from '@angular/material/sort';
 
 import { Observable, tap } from 'rxjs';
 
-import {Select, Store} from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 
 import { ITask } from '../../../../core/interfaces/task.interface';
 import { IUserWithoutPass } from '../../../../core/interfaces/user.interface';
@@ -83,7 +83,9 @@ import { PriorityClassPipe } from './pipes/priority-class.pipe';
 export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator | null = null;
 
-  @Select(UsersState.getUsers) public users$?: Observable<IUserWithoutPass[] | null>;
+  @Select(UsersState.getUsers) public users$?: Observable<
+  IUserWithoutPass[] | null
+  >;
 
   public tasks$?: Observable<ITask[] | null>;
 
@@ -147,12 +149,6 @@ export class TasksComponent implements OnInit {
         }
       }),
     );
-  }
-
-  private defineUsers(): void {
-    this.users$ = this._store
-      .select(UsersState.getUsers)
-      .pipe(tap((e) => console.log(e)));
   }
 
   private dispatchGetTasks(): void {

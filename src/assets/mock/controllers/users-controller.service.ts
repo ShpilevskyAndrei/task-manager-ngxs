@@ -6,7 +6,6 @@ import {
 } from '../../../app/core/interfaces/user.interface';
 import { IResponse } from '../../../app/core/interfaces/@response.interface';
 import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.enum';
-import { AccessTokenStorageService } from '../../../app/core/services/storage.service';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../../../app/shared/state/auth/auth.state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -27,7 +26,7 @@ export class UsersControllerService {
           (user: IUser): boolean => user.email === token,
         );
 
-        delete user!.password;
+        delete user?.password;
 
         return of({
           status: ResponseStatusesEnum.Success,

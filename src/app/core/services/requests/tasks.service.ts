@@ -27,17 +27,17 @@ export class TasksService {
 
   public createTask(task: ITask): Observable<IResponse<ITask>> {
     return this._httpService
-      .post<ITask, ITask[]>(API, ENDPOINTS.tasks['createTask'], task)
+      .post<ITask>(API, ENDPOINTS.tasks['createTask'], task)
       .pipe(
-        map((): IResponse<ITask> => {
-          return this._tasksController.createTaskControl(task);
+        map((createdTask: ITask): IResponse<ITask> => {
+          return this._tasksController.createTaskControl(createdTask);
         }),
       );
   }
 
   public editTask(task: ITask): Observable<IResponse<ITask>> {
     return this._httpService
-      .post<ITask, ITask[]>(API, ENDPOINTS.tasks['editTask'], task)
+      .patch<ITask>(API, ENDPOINTS.tasks['editTask'], task, task.id)
       .pipe(
         map((): IResponse<ITask> => {
           return this._tasksController.editTaskControl(task);
@@ -47,7 +47,7 @@ export class TasksService {
 
   public deleteTaskById(taskId: string): Observable<IResponse<boolean>> {
     return this._httpService
-      .delete<ITask[]>(API, ENDPOINTS.tasks['deleteTask'])
+      .delete<ITask>(API, ENDPOINTS.tasks['deleteTask'], taskId)
       .pipe(
         map((): IResponse<boolean> => {
           return this._tasksController.deleteTaskByIdControl(taskId);
