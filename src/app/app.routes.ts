@@ -1,4 +1,11 @@
 import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+
+import { map, Observable } from 'rxjs';
+
+import { Store } from '@ngxs/store';
+
+import { AuthState } from './shared/state/auth/auth.state';
 
 export const routes: Routes = [
   {
@@ -17,6 +24,13 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./features/login/login.component').then((m) => m.LoginComponent),
+    canMatch: [
+      (): Observable<boolean> => {
+        const _store = inject(Store);
+
+        return _store.select(AuthState.isAuthenticated).pipe(map((e) => !e));
+      },
+    ],
   },
   {
     path: 'dashboard',
@@ -24,6 +38,13 @@ export const routes: Routes = [
       import('./features/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent,
       ),
+    canMatch: [
+      (): Observable<boolean> => {
+        const _store = inject(Store);
+
+        return _store.select(AuthState.isAuthenticated);
+      },
+    ],
     children: [
       {
         path: '',
