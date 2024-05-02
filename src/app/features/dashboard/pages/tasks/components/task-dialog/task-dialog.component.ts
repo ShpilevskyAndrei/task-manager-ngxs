@@ -76,7 +76,7 @@ import { PriorityPipe } from '../../pipes/priority.pipe';
 })
 export class TaskDialogComponent implements OnInit {
   @Select(UsersState.getUsers) public users$?: Observable<
-    IUserWithoutPass[] | null
+  IUserWithoutPass[] | null
   >;
 
   @Select(UserState.getUserInfo)

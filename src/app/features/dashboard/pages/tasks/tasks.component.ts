@@ -45,7 +45,7 @@ import { SubheaderComponent } from '../../../../shared/components/subheader/subh
 import { TaskDialogType } from './components/task-dialog/enums/task-dialog-type.enum';
 import { tasksTableColumns } from './constants/tasks-columns';
 import { PriorityClassPipe } from './pipes/priority-class.pipe';
-import {PriorityPipe} from "./pipes/priority.pipe";
+import { PriorityPipe } from "./pipes/priority.pipe";
 
 @Component({
   selector: 'app-tasks',
@@ -86,7 +86,7 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator | null = null;
 
   @Select(UsersState.getUsers) public users$?: Observable<
-    IUserWithoutPass[] | null
+  IUserWithoutPass[] | null
   >;
 
   public tasks$?: Observable<ITask[] | null>;
