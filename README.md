@@ -1,27 +1,34 @@
-# NgxsCourse
+# NGXS Course
+This repository was created for students of the course:
+["Deep Dive into NGXS with Angular 17"](https://www.udemy.com)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+<img src="src/assets/images/ngxs.png" alt="NGXS">
 
-## Development server
+<br>
+For each topic (video) there are <b>2</b> separate branches: with the working and the solution environments:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<b>1). lesson-2.1/installation-ngxs/workplace</b> - the starting point at which the video author begins recording the lesson. This branch is needed to repeat the actions of the author.
+<br>
+<b>2). lesson-2.1/installation-ngxs/solution</b> - the end point that the author of the video came to during the lesson. This branch is needed to see the solution/result.
 
-## Code scaffolding
+## Run servers
+### To run the Backend Server
+    json-server --port 3000 ./src/assets/mock/db/db.json
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Index:
 
-## Build
+    http://localhost:3000
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Endpoints:
 
-## Running unit tests
+    http://localhost:3000/tasks
+    http://localhost:3000/users
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### To run the Dev UI Server
+    ng serve
 
-## Running end-to-end tests
+Index:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    http://localhost:4200
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Required 
