@@ -17,6 +17,9 @@ export const ENDPOINTS: Record<GatewaysEnum, { [key: string]: string }> = {
   },
   [GatewaysEnum.Users]: {
     getUsers: 'users',
+    createUser: 'users',
+    editUser: 'users',
+    deleteUser: 'users',
   },
   [GatewaysEnum.Tasks]: {
     getTasks: 'tasks',

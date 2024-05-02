@@ -1,4 +1,9 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { Observable, of, switchMap } from 'rxjs';
+
+import { Store } from '@ngxs/store';
 
 import {
   IUser,
@@ -6,10 +11,7 @@ import {
 } from '../../../app/core/interfaces/users/user.interface';
 import { IResponse } from '../../../app/core/interfaces/response.interface';
 import { ResponseStatusesEnum } from '../../../app/core/enums/response-statuses.enum';
-import { Store } from '@ngxs/store';
 import { AuthState } from '../../../app/shared/state/auth/auth.state';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsersControllerService {
@@ -45,5 +47,26 @@ export class UsersControllerService {
       status: ResponseStatusesEnum.Success,
       data: users,
     } as IResponse<IUserWithoutPass[]>;
+  }
+
+  public createUserControl(user: IUser): IResponse<IUser> {
+    return {
+      status: ResponseStatusesEnum.Success,
+      data: user,
+    } as IResponse<IUser>;
+  }
+
+  public editUserControl(user: IUser): IResponse<IUser> {
+    return {
+      status: ResponseStatusesEnum.Success,
+      data: user,
+    } as IResponse<IUser>;
+  }
+
+  public deleteUserByIdControl(userId: string): IResponse<boolean> {
+    return {
+      status: ResponseStatusesEnum.Success,
+      data: !!userId,
+    } as IResponse<boolean>;
   }
 }

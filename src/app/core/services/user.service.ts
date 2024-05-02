@@ -34,4 +34,34 @@ export class UserService {
         }),
       );
   }
+
+  public createUser(user: Exclude<IUser, 'id'>): Observable<IResponse<IUser>> {
+    return this._httpService
+      .post<IUser>(API, ENDPOINTS.users['createUser'], user)
+      .pipe(
+        map((createdUser: IUser): IResponse<IUser> => {
+          return this._userHelper.createUserControl(createdUser);
+        }),
+      );
+  }
+
+  public editUser(user: IUser): Observable<IResponse<IUser>> {
+    return this._httpService
+      .patch<IUser>(API, ENDPOINTS.users['editUser'], user, user.id)
+      .pipe(
+        map((): IResponse<IUser> => {
+          return this._userHelper.editUserControl(user);
+        }),
+      );
+  }
+
+  public deleteUserById(userId: string): Observable<IResponse<boolean>> {
+    return this._httpService
+      .delete<IUser>(API, ENDPOINTS.users['deleteUser'], userId)
+      .pipe(
+        map((): IResponse<boolean> => {
+          return this._userHelper.deleteUserByIdControl(userId);
+        }),
+      );
+  }
 }

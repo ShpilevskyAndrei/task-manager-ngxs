@@ -10,8 +10,4 @@ import { SubheaderComponent } from '../../../../shared/components/subheader/subh
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
-export class UsersComponent {
-  public openCreateUserDialog(): void {
-    //TODO. Make Logic
-  }
-}
+export class UsersComponent {}
