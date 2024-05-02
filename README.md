@@ -31,4 +31,10 @@ Index:
 
     http://localhost:4200
 
-## Required 
+## Author's environment:
+- Angular CLI: 17.3.4 </br> 
+- RxJs: 7.8.1 </br>
+- TypeScript: 5.3.3 </br>
+- Node: 20.10.0 </br>
+- Package Manager: npm 10.2.3 </br>
+- OS: win32 x64

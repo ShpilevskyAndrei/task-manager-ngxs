@@ -52,5 +52,17 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.2.5",
     "typescript": "~5.3.2"
-  }
+  },
+  "description": "This repository contains code examples and solutions for the NGXS course.",
+  "keywords": [
+    "angular",
+    "ngxs",
+    "state management"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShpilevskyAndrei/task-manager-ngxs"
+  },
+  "homepage": "https://github.com/ShpilevskyAndrei/task-manager-ngxs#readme"
 }
