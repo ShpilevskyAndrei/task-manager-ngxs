@@ -26,8 +26,13 @@ export class TasksService {
   }
 
   public createTask(task: ITask): Observable<IResponse<ITask>> {
+    const newTask: Exclude<ITask, 'id'> = { ...task };
+
+    delete (newTask as { id?: string }).id;
+    newTask.date = new Date();
+
     return this._httpService
-      .post<ITask>(API, ENDPOINTS.tasks['createTask'], task)
+      .post<ITask>(API, ENDPOINTS.tasks['createTask'], newTask)
       .pipe(
         map((createdTask: ITask): IResponse<ITask> => {
           return this._tasksController.createTaskControl(createdTask);

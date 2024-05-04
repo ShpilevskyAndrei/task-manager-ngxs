@@ -6,17 +6,17 @@ export class GetTasks {
 
 export class CreateTask {
   public static readonly type = '[TASKS] Create task';
-  public constructor(public task: ITask) {}
+  public constructor(public task: Exclude<ITask, 'id' | 'date'>) {}
 }
 
 export class DuplicateTask {
   public static readonly type = '[TASKS] Duplicate task';
-  public constructor(public task: ITask) {}
+  public constructor(public task: Exclude<ITask, 'id' | 'date'>) {}
 }
 
 export class EditTask {
   public static readonly type = '[TASKS] Edit task';
-  public constructor(public task: ITask) {}
+  public constructor(public task: Exclude<ITask, 'id' | 'date'>) {}
 }
 
 export class DeleteTask {

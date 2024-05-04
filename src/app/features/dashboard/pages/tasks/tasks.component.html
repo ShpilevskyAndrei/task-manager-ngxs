@@ -103,7 +103,7 @@
                 mat-icon-button
                 matTooltip="Delete task"
                 matTooltipPosition="below"
-                (click)="deleteTask($event, element.id)"
+                (click)="openDeleteTaskDialog($event, element)"
               >
                 <mat-icon color="warn">delete</mat-icon>
               </button>
@@ -115,7 +115,7 @@
         <tr
           mat-row
           *matRowDef="let row; columns: displayedColumns"
-          (click)="openTaskInfo(row)"
+          (click)="openTaskInfoDialog(row)"
         ></tr>
       </table>
 

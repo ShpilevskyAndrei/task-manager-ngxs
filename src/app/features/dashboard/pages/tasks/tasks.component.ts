@@ -35,7 +35,6 @@ import { Select, Store } from '@ngxs/store';
 import { ITask } from '../../../../core/interfaces/tasks/task.interface';
 import { IUserWithoutPass } from '../../../../core/interfaces/users/user.interface';
 import {
-  DeleteTask,
   DuplicateTask,
   GetTasks,
 } from '../../../../shared/state/tasks/tasks.actions';
@@ -48,6 +47,7 @@ import { TaskDialogType } from './components/task-dialog/enums/task-dialog-type.
 import { tasksTableColumns } from './constants/tasks-columns';
 import { PriorityClassPipe } from './pipes/priority-class.pipe';
 import { PriorityPipe } from './pipes/priority.pipe';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -107,12 +107,6 @@ export class TasksComponent implements OnInit {
     this.defineTasks();
   }
 
-  public deleteTask(event: Event, taskId: string): void {
-    event.stopPropagation();
-
-    this._store.dispatch(new DeleteTask(taskId));
-  }
-
   public openEditTaskDialog(event: Event, task: ITask): void {
     event.stopPropagation();
 
@@ -133,7 +127,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  public openTaskInfo(row: ITask): void {
+  public openTaskInfoDialog(row: ITask): void {
     this._matDialog.open(TaskDialogComponent, {
       data: {
         task: row as ITask,
@@ -142,15 +136,18 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  public openDeleteTaskDialog(event: Event, row: ITask): void {
+    event.stopPropagation();
+
+    this._matDialog.open(DeleteDialogComponent, {
+      data: row as ITask,
+    });
+  }
+
   public duplicateTask(event: Event, task: ITask): void {
     event.stopPropagation();
 
-    const newTask: Exclude<ITask, 'id'> = { ...task };
-
-    delete (newTask as { id?: string }).id;
-    newTask.date = new Date();
-
-    this._store.dispatch(new DuplicateTask(newTask));
+    this._store.dispatch(new DuplicateTask(task));
   }
 
   private defineTasks(): void {
