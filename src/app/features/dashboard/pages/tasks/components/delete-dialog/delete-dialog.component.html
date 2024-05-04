@@ -1,0 +1,19 @@
+<h2 class="title" mat-dialog-title>Deleting task</h2>
+<mat-dialog-content class="mat-typography">
+  <p style="margin-bottom: 8px">
+    Task: <b>"{{ data.title }}"</b>.
+  </p>
+  <p>Are you sure you want to delete this task?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    *ngIf="data.id"
+    mat-button
+    cdkFocusInitial
+    color="primary"
+    (click)="deleteTask(data.id)"
+  >
+    Delete
+  </button>
+</mat-dialog-actions>

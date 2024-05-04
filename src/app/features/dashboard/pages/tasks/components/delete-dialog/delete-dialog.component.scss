@@ -1,0 +1,12 @@
+@import "../../../../../../../visual/styles";
+
+:host {
+  .title {
+    padding-left: $offset-24px;
+    padding-bottom: $offset-12px;
+  }
+}
+
+mat-dialog-actions {
+  padding: $offset-24px;
+}
