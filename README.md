@@ -1,11 +1,11 @@
 # NGXS Course
 This repository was created for students of the course:
-["Deep Dive into NGXS with Angular 17"](https://www.udemy.com)
+"Deep Dive into NGXS with Angular 17"
 
 <img src="src/assets/images/ngxs.png" alt="NGXS">
 
 <br>
-For each topic (video) there are <b>2</b> separate branches: with the working and the solution environments:
+For each topic (video) there are <b>2</b> separate branches: with the working and the solution environments. For example:
 
 <b>1). lesson-2.1/installation-ngxs/workplace</b> - the starting point at which the video author begins recording the lesson. This branch is needed to repeat the actions of the author.
 <br>
