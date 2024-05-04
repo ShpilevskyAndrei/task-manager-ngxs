@@ -9,6 +9,11 @@ export class CreateTask {
   public constructor(public task: ITask) {}
 }
 
+export class DuplicateTask {
+  public static readonly type = '[TASKS] Duplicate task';
+  public constructor(public task: ITask) {}
+}
+
 export class EditTask {
   public static readonly type = '[TASKS] Edit task';
   public constructor(public task: ITask) {}

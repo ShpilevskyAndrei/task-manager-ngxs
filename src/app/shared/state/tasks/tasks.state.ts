@@ -3,7 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { CreateTask, DeleteTask, EditTask, GetTasks } from './tasks.actions';
+import {
+  CreateTask,
+  DeleteTask,
+  DuplicateTask,
+  EditTask,
+  GetTasks,
+} from './tasks.actions';
 
 import { TasksService } from '../../../core/services/tasks.service';
 import { ITask } from '../../../core/interfaces/tasks/task.interface';
@@ -41,6 +47,26 @@ export class TasksState {
 
   @Action(CreateTask)
   public createTask(
+    ctx: StateContext<TasksStateModel>,
+    action: CreateTask,
+  ): Observable<IResponse<ITask>> {
+    const state: TasksStateModel = ctx.getState();
+
+    return this._tasksService.createTask(action.task).pipe(
+      tap((res: IResponse<ITask>): void => {
+        const newData: ITask[] = [res.data!];
+
+        if (state.data && state.data.length) {
+          newData.push(...state.data);
+        }
+
+        ctx.patchState({ data: newData });
+      }),
+    );
+  }
+
+  @Action(DuplicateTask)
+  public duplicateTask(
     ctx: StateContext<TasksStateModel>,
     action: CreateTask,
   ): Observable<IResponse<ITask>> {

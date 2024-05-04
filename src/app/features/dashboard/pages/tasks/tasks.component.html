@@ -85,11 +85,26 @@
             <div style="display: flex">
               <button
                 mat-icon-button
+                matTooltip="Edit task"
+                matTooltipPosition="below"
                 (click)="openEditTaskDialog($event, element)"
               >
                 <mat-icon color="primary">edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteTask($event, element.id)">
+              <button
+                mat-icon-button
+                matTooltip="Duplicate task"
+                matTooltipPosition="below"
+                (click)="duplicateTask($event, element)"
+              >
+                <mat-icon color="primary">control_point_duplicate</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                matTooltip="Delete task"
+                matTooltipPosition="below"
+                (click)="deleteTask($event, element.id)"
+              >
                 <mat-icon color="warn">delete</mat-icon>
               </button>
             </div>

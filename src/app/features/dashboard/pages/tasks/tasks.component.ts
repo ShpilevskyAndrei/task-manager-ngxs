@@ -26,6 +26,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { Observable, tap } from 'rxjs';
 
@@ -35,6 +36,7 @@ import { ITask } from '../../../../core/interfaces/tasks/task.interface';
 import { IUserWithoutPass } from '../../../../core/interfaces/users/user.interface';
 import {
   DeleteTask,
+  DuplicateTask,
   GetTasks,
 } from '../../../../shared/state/tasks/tasks.actions';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
@@ -45,7 +47,7 @@ import { SubheaderComponent } from '../../../../shared/components/subheader/subh
 import { TaskDialogType } from './components/task-dialog/enums/task-dialog-type.enum';
 import { tasksTableColumns } from './constants/tasks-columns';
 import { PriorityClassPipe } from './pipes/priority-class.pipe';
-import { PriorityPipe } from "./pipes/priority.pipe";
+import { PriorityPipe } from './pipes/priority.pipe';
 
 @Component({
   selector: 'app-tasks',
@@ -77,6 +79,7 @@ import { PriorityPipe } from "./pipes/priority.pipe";
     MatSort,
     MatSortHeader,
     PriorityPipe,
+    MatTooltip,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -137,6 +140,17 @@ export class TasksComponent implements OnInit {
         type: TaskDialogType.Read,
       },
     });
+  }
+
+  public duplicateTask(event: Event, task: ITask): void {
+    event.stopPropagation();
+
+    const newTask: Exclude<ITask, 'id'> = { ...task };
+
+    delete (newTask as { id?: string }).id;
+    newTask.date = new Date();
+
+    this._store.dispatch(new DuplicateTask(newTask));
   }
 
   private defineTasks(): void {
